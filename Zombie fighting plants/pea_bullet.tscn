@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dpv0w2lkgmcdu"]
 
-[ext_resource type="Script" path="res://HorizontalBullet.gd" id="1_3e5kl"]
+[ext_resource type="Script" path="res://enemies/HorizontalMovement.gd" id="1_2cium"]
 [ext_resource type="Texture2D" uid="uid://docujnpbcdu8l" path="res://assets/items.png" id="2_8r02g"]
 [ext_resource type="PackedScene" uid="uid://dd6pyh2jomfa8" path="res://components/deal_damage_component.tscn" id="3_5i2ea"]
 
@@ -24,8 +24,9 @@ animations = [{
 [node name="PeaBullet" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 0
-script = ExtResource("1_3e5kl")
-bulletSpeed = 100.0
+script = ExtResource("1_2cium")
+moveSpeed = 100.0
+rightDir = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

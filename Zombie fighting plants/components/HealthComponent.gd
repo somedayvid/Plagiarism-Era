@@ -3,7 +3,7 @@ extends Node2D
 @export var maxHealth := 40.0
 var currentHealth
 
-func _ready():
+func _ready() -> void:
 	currentHealth = maxHealth
 	
 func _take_damage(damageToTake: Attack):

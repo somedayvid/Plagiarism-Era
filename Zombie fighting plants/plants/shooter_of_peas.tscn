@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dkqkjjdr0fdpf"]
 
 [ext_resource type="Texture2D" uid="uid://h14ms64v4tpq" path="res://assets/animals.png" id="1_bv7sy"]
-[ext_resource type="Script" path="res://shooter_of_peas.gd" id="1_l8aj7"]
+[ext_resource type="Script" path="res://scripts/shooter_of_peas.gd" id="1_xwhgv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_11e2i"]
 atlas = ExtResource("1_bv7sy")
@@ -21,7 +21,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twt31"]
 
 [node name="ShooterOfPeas" type="Area2D"]
-script = ExtResource("1_l8aj7")
+script = ExtResource("1_xwhgv")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gcuad")
