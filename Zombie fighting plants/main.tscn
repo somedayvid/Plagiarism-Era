@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://biwfynwotkj13"]
+
+[ext_resource type="PackedScene" uid="uid://dkqkjjdr0fdpf" path="res://plants/shooter_of_peas.tscn" id="1_43exw"]
+[ext_resource type="PackedScene" uid="uid://hnseygyo4u4l" path="res://enemies/zombie.tscn" id="2_3psop"]
+
+[node name="Main" type="Node2D"]
+
+[node name="ShooterOfPeas" parent="." instance=ExtResource("1_43exw")]
+position = Vector2(-145, -28)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Zombie" parent="." instance=ExtResource("2_3psop")]
+position = Vector2(149, -26)

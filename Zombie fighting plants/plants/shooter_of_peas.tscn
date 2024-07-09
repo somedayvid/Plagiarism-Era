@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkqkjjdr0fdpf"]
+
+[ext_resource type="Texture2D" uid="uid://h14ms64v4tpq" path="res://assets/animals.png" id="1_bv7sy"]
+[ext_resource type="Script" path="res://shooter_of_peas.gd" id="1_l8aj7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11e2i"]
+atlas = ExtResource("1_bv7sy")
+region = Rect2(0, 320, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gcuad"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11e2i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twt31"]
+
+[node name="ShooterOfPeas" type="Area2D"]
+script = ExtResource("1_l8aj7")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gcuad")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_twt31")
+
+[node name="BulletPoint" type="Marker2D" parent="."]
+position = Vector2(13, -8)
+
+[node name="InBetweenShots" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="InBetweenShots" to="." method="_on_in_between_shots_timeout"]
