@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjl7fl1a2ujim"]
+[gd_scene load_steps=3 format=3 uid="uid://cjl7fl1a2ujim"]
 
 [ext_resource type="Texture2D" uid="uid://dc0ikq7cojp2p" path="res://assets/tiles.png" id="1_c5yav"]
+[ext_resource type="Script" path="res://scripts/ground_tile.gd" id="2_y4orv"]
 
 [node name="GroundTile" type="Sprite2D"]
 texture = ExtResource("1_c5yav")
 region_enabled = true
 region_rect = Rect2(32, 96, 32, 32)
+script = ExtResource("2_y4orv")
