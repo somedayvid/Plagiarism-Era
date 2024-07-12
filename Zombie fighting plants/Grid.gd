@@ -15,6 +15,24 @@ const spriteSideLength := 100
 var currentMouseGridPos := Vector2.ZERO
 var previousMouseGridPos := Vector2.ZERO
 
+var gridX := 0:
+	set(value):
+		if value >= matrixLength - 1:
+			gridX = matrixLength - 1
+		elif value < 0:
+			gridX = 0
+		else:
+			gridX = value 
+var gridY := 0:
+	set(value):
+		if value >= matrixHeight - 1:
+			gridY = matrixHeight - 1
+		elif value < 0:
+			gridY = 0
+		else:
+			gridY = value 
+
+
 func _ready() -> void:
 	var tileContainerList = tile_container.get_children()
 	var currentIndex = 0
@@ -39,6 +57,7 @@ func _ready() -> void:
 		#print(placementGrid[count])
 		#
 func _process(delta) -> void:
+	print(currentMouseGridPos)
 	_change_mouse_pos()
 
 	if placementGrid[currentMouseGridPos.x][previousMouseGridPos.y].lit != true:
@@ -51,5 +70,6 @@ func _process(delta) -> void:
 	previousMouseGridPos = currentMouseGridPos
 	
 func _change_mouse_pos():
-	currentMouseGridPos = Vector2(floor((get_viewport().get_mouse_position().x - startX)/spriteSideLength),
-	 floor((get_viewport().get_mouse_position().y - startY)/spriteSideLength))
+	gridX = floor(get_viewport().get_mouse_position().x - startX)/spriteSideLength
+	gridY =  floor(get_viewport().get_mouse_position().y - startY)/spriteSideLength
+	currentMouseGridPos = Vector2(gridX, gridY)
