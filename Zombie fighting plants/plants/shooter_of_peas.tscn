@@ -35,6 +35,5 @@ shape = SubResource("RectangleShape2D_twt31")
 position = Vector2(13, -8)
 
 [node name="InBetweenShots" type="Timer" parent="."]
-autostart = true
 
 [connection signal="timeout" from="InBetweenShots" to="." method="_on_in_between_shots_timeout"]

@@ -4,9 +4,14 @@ extends Area2D
 @onready var in_between_shots = $InBetweenShots
 const PEA_BULLET = preload("res://pea_bullet.tscn")
 var canShoot
+var beingHeld := true
 
 func _ready():
 	canShoot = false
+	
+func _process(delta) -> void:
+	if beingHeld:
+		global_position = Singleton.mousePos
 	
 func _on_in_between_shots_timeout():
 	_shoot()
