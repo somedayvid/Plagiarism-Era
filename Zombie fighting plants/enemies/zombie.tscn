@@ -23,6 +23,7 @@ animations = [{
 }]
 
 [node name="Zombie" type="CharacterBody2D"]
+scale = Vector2(3, 3)
 collision_layer = 3
 script = ExtResource("1_wbsqj")
 moveSpeed = 40.0

@@ -21,7 +21,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twt31"]
 
 [node name="ShooterOfPeas" type="Area2D"]
+scale = Vector2(3, 3)
 script = ExtResource("1_xwhgv")
+sunCost = 100
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gcuad")

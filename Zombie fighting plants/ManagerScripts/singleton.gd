@@ -1,5 +1,6 @@
 extends Node
 
+#mouseStuff
 var mousePos := Vector2.ZERO
 var holdingSeed := false:
 	set(value):
@@ -12,15 +13,20 @@ var justPressed := false
 var hand : Node2D
 var grid : Node2D
 
+#gameStuff
+var sunCount := 0
+
 func _ready():
 	hand = get_tree().root.get_child(1).get_node("Hand")
 	grid = get_tree().root.get_child(1).get_node("Grid")
 
 func _process(delta):
+	mouseStuff()
+
+func mouseStuff():
 	hasSeed()
 	mousePress()
 	gridPos = grid.currentMouseGridPos
-	print(grid.placementGrid[gridPos.x][gridPos.y])
 	mousePos = get_viewport().get_mouse_position()
 
 func mousePress():
@@ -30,13 +36,21 @@ func mousePress():
 		mouseDown = false
 		if holdingSeed:
 			var heldItem = hand.get_child(0)
-			heldItem.global_position = grid.placementGrid[gridPos.x][gridPos.y].global_position
-			heldItem.beingHeld = false
-			hand.remove_child(heldItem)
-			get_tree().root.get_child(1).add_child(heldItem)
+			if grid.onGrid && sunCount >= heldItem.sunCost:
+				heldItem.global_position = grid.placementGrid[gridPos.x][gridPos.y].global_position
+				heldItem.beingHeld = false
+				hand.remove_child(heldItem)
+				get_tree().root.get_child(1).add_child(heldItem)
+				#maybe move this somewhere else once things work! :)
+				sunCount -= heldItem.sunCost
+			else:
+				heldItem.queue_free()
 
 func hasSeed():
 	if hand.get_child_count() > 0:
 		holdingSeed = true
 	else:
 		holdingSeed = false
+
+func gainSun(amtSun:int):
+	sunCount += amtSun

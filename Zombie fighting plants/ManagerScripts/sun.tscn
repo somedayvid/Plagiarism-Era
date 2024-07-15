@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://duom6j2fnxrph"]
+
+[ext_resource type="Script" path="res://scripts/sun.gd" id="1_fi46w"]
+[ext_resource type="Texture2D" uid="uid://df4qlc13fndkx" path="res://assets/sun.png" id="2_ykhpk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v3be4"]
+
+[node name="Sun" type="CharacterBody2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_fi46w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v3be4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.13, 0.13)
+texture = ExtResource("2_ykhpk")
+
+[node name="LandedTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DisappearTimer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[connection signal="timeout" from="LandedTimer" to="." method="_on_landed_timeout"]
+[connection signal="timeout" from="DisappearTimer" to="." method="_on_disappear_timer_timeout"]

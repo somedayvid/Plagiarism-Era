@@ -2,7 +2,7 @@ extends Area2D
 
 @onready var bullet_point = $BulletPoint
 @onready var in_between_shots = $InBetweenShots
-const PEA_BULLET = preload("res://pea_bullet.tscn")
+const PEA_BULLET = preload("res://plants/pea_bullet.tscn")
 var canShoot := false
 var beingHeld := true:
 	get:
@@ -12,7 +12,10 @@ var beingHeld := true:
 var staticImage := false:
 	set(value):
 		staticImage = value
-	
+@export var sunCost := 0:
+	get:
+		return sunCost
+
 func _process(delta) -> void:
 	if !staticImage:
 		if beingHeld:
