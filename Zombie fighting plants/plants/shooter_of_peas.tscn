@@ -23,7 +23,7 @@ animations = [{
 [node name="ShooterOfPeas" type="Area2D"]
 script = ExtResource("1_xwhgv")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gcuad")
 flip_h = true
 

@@ -1,18 +1,22 @@
 extends Node2D
 
 const GROUND_TILE = preload("res://ground_tile.tscn")
-var placementGrid = []
+var placementGrid = []:
+	get:
+		return placementGrid
 @onready var tile_container = $"../TileContainer"
 @onready var marker_2d = $"../Marker2D"
 
 const matrixLength := 9
 const matrixHeight := 5
 
-const startX := 120
-const startY := 155
-const spriteSideLength := 100
+const startX := 128
+const startY := 168
+const spriteSideLength := 96
 
-var currentMouseGridPos := Vector2.ZERO
+var currentMouseGridPos := Vector2.ZERO:
+	get:
+		return currentMouseGridPos
 var previousMouseGridPos := Vector2.ZERO
 
 var gridX := 0.0:

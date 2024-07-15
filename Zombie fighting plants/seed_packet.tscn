@@ -9,17 +9,13 @@ size = Vector2(26, 26)
 [node name="SeedPacket" type="Node2D"]
 script = ExtResource("1_ukqfx")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PacketBorder" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_24a3q")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-scale = Vector2(0.1875, 0.1875)
+[node name="PlantSprite" type="Sprite2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_5c6no")
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
