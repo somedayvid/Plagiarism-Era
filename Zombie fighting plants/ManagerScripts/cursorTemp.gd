@@ -8,14 +8,14 @@ func _ready():
 
 func _process(delta):
 	global_position = Singleton.mousePos
-	if Input.is_action_pressed("mouseAction"):
+	if Input.is_action_pressed("mouseAction") && item != null:
 		if item.type == "Sun":
 			Singleton.gainSun(item.sunValue)
-			item.collision_layer = 0
-			item.collision_mask = 0
+			item.call_deferred("queue_free")
+			item = null
 
 func _on_body_entered(area):
 	item = area
 
 func _on_body_exited(body):
-	pass
+	item = null
