@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://biwfynwotkj13"]
+[gd_scene load_steps=8 format=3 uid="uid://biwfynwotkj13"]
 
 [ext_resource type="Script" path="res://ManagerScripts/Grid.gd" id="1_mtwp2"]
 [ext_resource type="PackedScene" uid="uid://cjl7fl1a2ujim" path="res://ground_tile.tscn" id="2_b0dik"]
 [ext_resource type="PackedScene" uid="uid://bodypbg3wb4t3" path="res://plants/seed_packet.tscn" id="3_tbhtq"]
-[ext_resource type="PackedScene" uid="uid://dkqkjjdr0fdpf" path="res://plants/shooter_of_peas.tscn" id="4_s6cg2"]
+[ext_resource type="PackedScene" uid="uid://i7irs85xolx6" path="res://plants/peaShooter.tscn" id="4_3oa41"]
 [ext_resource type="PackedScene" uid="uid://byu2kdav0esxe" path="res://ManagerScripts/cursorTemp.tscn" id="6_c22bv"]
 [ext_resource type="Script" path="res://ManagerScripts/SunManager.gd" id="6_gbf2e"]
+[ext_resource type="PackedScene" uid="uid://d06k8uhx66jr4" path="res://plants/sunFlower.tscn" id="7_4eh8j"]
 
 [node name="Main" type="Node2D"]
 
@@ -198,8 +199,7 @@ scale = Vector2(3, 3)
 
 [node name="SeedPacket" parent="." instance=ExtResource("3_tbhtq")]
 position = Vector2(208, 80)
-scale = Vector2(3, 3)
-scene = ExtResource("4_s6cg2")
+scene = ExtResource("4_3oa41")
 
 [node name="Hand" type="Node2D" parent="."]
 
@@ -207,6 +207,7 @@ scene = ExtResource("4_s6cg2")
 script = ExtResource("6_gbf2e")
 
 [node name="SunSpawn" type="Timer" parent="SunManager"]
+wait_time = 10.0
 autostart = true
 
 [node name="TextEdit" type="TextEdit" parent="SunManager"]
@@ -217,5 +218,9 @@ offset_bottom = 96.0
 
 [node name="CursorTemp" parent="." instance=ExtResource("6_c22bv")]
 position = Vector2(-2, 175)
+
+[node name="SeedPacket2" parent="." instance=ExtResource("3_tbhtq")]
+position = Vector2(304, 80)
+scene = ExtResource("7_4eh8j")
 
 [connection signal="timeout" from="SunManager/SunSpawn" to="SunManager" method="_on_sun_spawn_timeout"]

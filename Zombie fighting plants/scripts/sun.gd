@@ -15,7 +15,7 @@ var sunValue := 50:
 
 func _ready():
 	velocity = Vector2.DOWN * fallSpeed
-	landedTimer.wait_time = randi() % 5 + 2
+	landedTimer.wait_time = randi() % 4 + 2
 	landedTimer.start()
 
 func _process(delta):

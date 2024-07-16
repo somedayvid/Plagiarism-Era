@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://i7irs85xolx6"]
+
+[ext_resource type="PackedScene" uid="uid://c74u20fgko2rr" path="res://plants/plant_parent.tscn" id="1_q37s1"]
+[ext_resource type="Texture2D" uid="uid://h14ms64v4tpq" path="res://assets/animals.png" id="2_ir4x4"]
+[ext_resource type="Script" path="res://components/ShootingComponent.gd" id="3_dhncm"]
+[ext_resource type="PackedScene" uid="uid://dpv0w2lkgmcdu" path="res://plants/pea_bullet.tscn" id="4_msb3y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpg4n"]
+atlas = ExtResource("2_ir4x4")
+region = Rect2(0, 320, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1k3qr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpg4n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8n1sf"]
+
+[node name="PeaShooter" node_paths=PackedStringArray("actionNode") instance=ExtResource("1_q37s1")]
+sunCost = 100
+actionNode = NodePath("ShootingComponent")
+
+[node name="Animation" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_1k3qr")
+flip_h = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_8n1sf")
+
+[node name="BulletPoint" type="Marker2D" parent="." index="2"]
+position = Vector2(13, -8)
+
+[node name="InBetweenShots" type="Timer" parent="." index="3"]
+
+[node name="ShootingComponent" type="Node2D" parent="." index="4"]
+script = ExtResource("3_dhncm")
+scene = ExtResource("4_msb3y")
+
+[connection signal="startAction" from="." to="ShootingComponent" method="_on_plant_parent_start_action"]
+[connection signal="startAction" from="." to="ShootingComponent" method="_on_pea_shooter_start_action"]
+[connection signal="timeout" from="InBetweenShots" to="ShootingComponent" method="_on_in_between_shots_timeout"]

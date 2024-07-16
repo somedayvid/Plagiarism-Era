@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://d06k8uhx66jr4"]
+
+[ext_resource type="PackedScene" uid="uid://c74u20fgko2rr" path="res://plants/plant_parent.tscn" id="1_yi16b"]
+[ext_resource type="Texture2D" uid="uid://h14ms64v4tpq" path="res://assets/animals.png" id="2_y6fab"]
+[ext_resource type="Script" path="res://scripts/SunSpawningComponent.gd" id="3_n7hkg"]
+[ext_resource type="PackedScene" uid="uid://duom6j2fnxrph" path="res://ManagerScripts/sun.tscn" id="4_p4iaj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dtvt"]
+atlas = ExtResource("2_y6fab")
+region = Rect2(192, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lfsjj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dtvt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2jje8"]
+
+[node name="PlantParent" instance=ExtResource("1_yi16b")]
+sunCost = 50
+
+[node name="Animation" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_lfsjj")
+flip_h = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_2jje8")
+
+[node name="SunSpawningComponent" type="Node2D" parent="." index="2"]
+script = ExtResource("3_n7hkg")
+scene = ExtResource("4_p4iaj")
+
+[node name="TimeBetweenSunSpawn" type="Timer" parent="." index="3"]
+wait_time = 24.0
+
+[node name="Marker2D" type="Marker2D" parent="." index="4"]
+
+[connection signal="startAction" from="." to="SunSpawningComponent" method="_on_plant_parent_start_action"]
+[connection signal="timeout" from="TimeBetweenSunSpawn" to="SunSpawningComponent" method="_on_time_between_sun_spawn_timeout"]

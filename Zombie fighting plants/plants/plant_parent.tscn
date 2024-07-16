@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c74u20fgko2rr"]
+
+[ext_resource type="Script" path="res://scripts/shooter_of_peas.gd" id="1_v0vcr"]
+
+[node name="PlantParent" type="Area2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_v0vcr")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

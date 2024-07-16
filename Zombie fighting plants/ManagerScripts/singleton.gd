@@ -14,7 +14,7 @@ var hand : Node2D
 var grid : Node2D
 
 #gameStuff
-var sunCount := 0
+var sunCount := 100
 
 func _ready():
 	hand = get_tree().root.get_child(1).get_node("Hand")
