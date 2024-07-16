@@ -1,11 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://c74u20fgko2rr"]
+[gd_scene load_steps=3 format=3 uid="uid://c74u20fgko2rr"]
 
 [ext_resource type="Script" path="res://scripts/shooter_of_peas.gd" id="1_v0vcr"]
+[ext_resource type="PackedScene" uid="uid://dnqsky3mq0na" path="res://components/health_component.tscn" id="2_73ln2"]
 
 [node name="PlantParent" type="Area2D"]
 scale = Vector2(3, 3)
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_v0vcr")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_73ln2")]

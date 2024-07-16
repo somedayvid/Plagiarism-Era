@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://biwfynwotkj13"]
+[gd_scene load_steps=8 format=3 uid="uid://biwfynwotkj13"]
 
 [ext_resource type="Script" path="res://ManagerScripts/Grid.gd" id="1_mtwp2"]
 [ext_resource type="PackedScene" uid="uid://cjl7fl1a2ujim" path="res://ground_tile.tscn" id="2_b0dik"]
@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://byu2kdav0esxe" path="res://ManagerScripts/cursorTemp.tscn" id="6_c22bv"]
 [ext_resource type="Script" path="res://ManagerScripts/SunManager.gd" id="6_gbf2e"]
 [ext_resource type="PackedScene" uid="uid://d06k8uhx66jr4" path="res://plants/sunFlower.tscn" id="7_4eh8j"]
-[ext_resource type="Script" path="res://ManagerScripts/ZombieManager.gd" id="8_wi4sl"]
-[ext_resource type="PackedScene" uid="uid://hnseygyo4u4l" path="res://enemies/zombie.tscn" id="9_ox23y"]
 
 [node name="Main" type="Node2D"]
 
@@ -243,14 +241,5 @@ position = Vector2(784, 80)
 
 [node name="CursorTemp" parent="." instance=ExtResource("6_c22bv")]
 position = Vector2(-2, 175)
-
-[node name="ZombieManager" type="Node2D" parent="."]
-script = ExtResource("8_wi4sl")
-basicZombie = ExtResource("9_ox23y")
-
-[node name="ZombieList" type="Node2D" parent="ZombieManager"]
-
-[node name="Zombie" parent="." instance=ExtResource("9_ox23y")]
-position = Vector2(1029, 405)
 
 [connection signal="timeout" from="SunManager/SunSpawn" to="SunManager" method="_on_sun_spawn_timeout"]

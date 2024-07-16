@@ -38,6 +38,7 @@ func mousePress():
 			var heldItem = hand.get_child(0)
 			if grid.onGrid && sunCount >= heldItem.sunCost:
 				heldItem.global_position = grid.placementGrid[gridPos.x][gridPos.y].global_position
+				heldItem.gridPos = gridPos
 				heldItem.beingHeld = false
 				hand.remove_child(heldItem)
 				get_tree().root.get_child(1).add_child(heldItem)
