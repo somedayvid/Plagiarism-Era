@@ -2,6 +2,11 @@ extends CharacterBody2D
 
 @export var moveSpeed : float
 @export var rightDir := false
+var eating := false:
+	get:
+		return eating
+	set(value):
+		eating = value
 
 func _ready():
 	if rightDir:
@@ -10,4 +15,5 @@ func _ready():
 		velocity = Vector2(-moveSpeed,0)
 
 func _physics_process(delta):
-	move_and_slide()
+	if !eating:
+		move_and_slide()

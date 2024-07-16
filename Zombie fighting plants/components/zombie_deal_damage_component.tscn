@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://djyxgfr5t8i4d"]
+
+[ext_resource type="Script" path="res://components/ZombieDealDamageComponent.gd" id="1_muohx"]
+
+[node name="ZombieDealDamageComponent" type="Node2D"]
+script = ExtResource("1_muohx")
+
+[node name="TimeBetweenAttacks" type="Timer" parent="."]
+
+[connection signal="timeout" from="TimeBetweenAttacks" to="." method="_on_time_between_attacks_timeout"]
