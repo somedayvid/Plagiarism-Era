@@ -23,5 +23,5 @@ func _process(delta) -> void:
 	if Singleton.mouseDown && packetRect.has_point(Singleton.mousePos) && !Singleton.holdingSeed:
 		var instance = scene.instantiate()
 		instance.global_position = get_viewport().get_mouse_position()
-		get_parent().get_node("Hand").add_child(instance)
+		get_parent().get_parent().get_node("Hand").add_child(instance)
 		Singleton.holdingSeed = true

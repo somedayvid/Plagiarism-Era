@@ -4,8 +4,7 @@ const GROUND_TILE = preload("res://ground_tile.tscn")
 var placementGrid = []:
 	get:
 		return placementGrid
-@onready var tile_container = $"../TileContainer"
-@onready var marker_2d = $"../Marker2D"
+var tile_container
 
 const matrixLength := 9
 const matrixHeight := 5
@@ -40,6 +39,7 @@ var onGrid := false:
 		return onGrid
 
 func _ready() -> void:
+	tile_container = get_child(0)
 	var tileContainerList = tile_container.get_children()
 	var currentIndex = 0
 	for i in matrixLength:

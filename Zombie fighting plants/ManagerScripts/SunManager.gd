@@ -16,4 +16,4 @@ func spawnSun():
 	var spawnPos = Vector2(randi() % 1152,randi() % -150 - 50)
 	var instance = SUN.instantiate()
 	instance.global_position = spawnPos
-	get_parent().add_child(instance)
+	get_node("SunList").add_child(instance)
