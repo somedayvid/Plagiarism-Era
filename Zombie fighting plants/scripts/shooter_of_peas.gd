@@ -15,6 +15,9 @@ var staticImage := false:
 	get:
 		return sunCost
 @export var actionNode : Node2D
+var gridPos := Vector2.ZERO:
+	set(value):
+		gridPos = value
 
 signal startAction
 
