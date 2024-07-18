@@ -1,12 +1,29 @@
 extends Node2D
+@export var waveCounterDisplay := RichTextLabel
 
-@export var basicZombie := PackedScene
+@export var basicZombie : PackedScene
+@onready var zombie = $"../Zombie"
 
-# Called when the node enters the scene tree for the first time.
+var basicsToSpawn : int
+var currentWave := 0
+var zombiesToSpawn = []	
+
 func _ready():
-	pass # Replace with function body.
+	currentWave += 1 
+	basicsToSpawn = 2
+	spawnWave()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func spawnWave():
+	for zombie in basicsToSpawn:
+		spawnInRow(basicZombie)
+
+func spawnInRow(zombieToSpawn: PackedScene):
+	var zombieInstance = zombieToSpawn.instantiate()
+	zombieInstance.global_position = Vector2(1200, Singleton.spriteSideLength * rowToSpawnIn() + Singleton.startY)
+	get_parent().add_child.call_deferred(zombieInstance)
+
+func rowToSpawnIn():
+	return randi() % 5

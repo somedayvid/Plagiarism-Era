@@ -244,13 +244,17 @@ position = Vector2(784, 80)
 [node name="CursorTemp" parent="." instance=ExtResource("6_c22bv")]
 position = Vector2(-2, 175)
 
-[node name="ZombieManager" type="Node2D" parent="."]
+[node name="ZombieManager" type="Node2D" parent="." node_paths=PackedStringArray("waveCounterDisplay")]
 script = ExtResource("8_wi4sl")
+waveCounterDisplay = NodePath("RichTextLabel")
 basicZombie = ExtResource("9_ox23y")
 
 [node name="ZombieList" type="Node2D" parent="ZombieManager"]
 
-[node name="Zombie" parent="." instance=ExtResource("9_ox23y")]
-position = Vector2(1029, 405)
+[node name="RichTextLabel" type="RichTextLabel" parent="ZombieManager"]
+offset_left = 910.0
+offset_top = -2.0
+offset_right = 950.0
+offset_bottom = 38.0
 
 [connection signal="timeout" from="SunManager/SunSpawn" to="SunManager" method="_on_sun_spawn_timeout"]

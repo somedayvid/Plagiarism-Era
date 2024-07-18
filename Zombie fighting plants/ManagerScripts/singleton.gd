@@ -16,9 +16,19 @@ var grid : Node2D
 #gameStuff
 var sunCount := 100
 
+#grid stuff for other classes
+var matrixLength := 9
+const matrixHeight := 5
+
+const startX := 128 
+const startY := 168
+const spriteSideLength := 96
+
 func _ready():
 	hand = get_tree().root.get_child(1).get_node("Hand")
 	grid = get_tree().root.get_child(1).get_node("Grid")
+	
+	matrixLength = grid.matrixLength
 
 func _process(delta):
 	mouseStuff()

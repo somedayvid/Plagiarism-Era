@@ -7,6 +7,7 @@ var eating := false:
 		return eating
 	set(value):
 		eating = value
+var type = "Zombie"
 
 func _ready():
 	if rightDir:

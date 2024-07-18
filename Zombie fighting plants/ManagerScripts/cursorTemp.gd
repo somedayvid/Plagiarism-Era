@@ -13,6 +13,8 @@ func _process(delta):
 			Singleton.gainSun(item.sunValue)
 			item.call_deferred("queue_free")
 			item = null
+		else:
+			pass
 
 func _on_body_entered(area):
 	item = area
