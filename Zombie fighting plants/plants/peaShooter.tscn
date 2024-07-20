@@ -37,10 +37,14 @@ shape = SubResource("RectangleShape2D_8n1sf")
 position = Vector2(13, -8)
 
 [node name="InBetweenShots" type="Timer" parent="." index="3"]
+wait_time = 1.5
 
 [node name="ShootingComponent" type="Node2D" parent="." index="4"]
 script = ExtResource("3_dhncm")
 scene = ExtResource("4_msb3y")
+
+[node name="ZombieDetection" type="RayCast2D" parent="." index="6"]
+target_position = Vector2(300, 0)
 
 [connection signal="startAction" from="." to="ShootingComponent" method="_on_plant_parent_start_action"]
 [connection signal="startAction" from="." to="ShootingComponent" method="_on_pea_shooter_start_action"]

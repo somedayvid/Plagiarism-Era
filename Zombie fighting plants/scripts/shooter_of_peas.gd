@@ -18,6 +18,7 @@ var staticImage := false:
 var gridPos := Vector2.ZERO:
 	set(value):
 		gridPos = value
+var type = "Plant"
 
 signal startAction
 

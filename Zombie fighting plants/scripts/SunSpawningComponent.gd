@@ -13,4 +13,6 @@ func _on_time_between_sun_spawn_timeout():
 func spawnSun():
 	var instance = scene.instantiate()
 	instance.global_position = marker_2d.global_position
+	instance.plantSpawned = true
 	get_parent().get_parent().add_child(instance)
+	

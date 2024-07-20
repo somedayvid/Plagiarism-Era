@@ -8,7 +8,6 @@ func _ready() -> void:
 	
 func _take_damage(damageToTake: Attack):
 	currentHealth -= damageToTake.damageOnHit
-	print(currentHealth)
 	_die()
 	
 func _die():

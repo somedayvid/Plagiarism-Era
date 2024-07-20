@@ -6,7 +6,7 @@
 [node name="PlantParent" type="Area2D"]
 scale = Vector2(3, 3)
 collision_layer = 8
-collision_mask = 8
+collision_mask = 0
 script = ExtResource("1_v0vcr")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]

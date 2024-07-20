@@ -7,6 +7,7 @@ var eating := false:
 		return eating
 	set(value):
 		eating = value
+var released := false
 var type = "Zombie"
 
 func _ready():
@@ -18,3 +19,6 @@ func _ready():
 func _physics_process(delta):
 	if !eating:
 		move_and_slide()
+
+func _on_release_timer_timeout():
+	released = true

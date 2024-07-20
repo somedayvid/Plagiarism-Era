@@ -12,10 +12,16 @@ var type := "Sun":
 var sunValue := 50:
 	get:
 		return sunValue
+var plantSpawned := false:
+	set(value):
+		plantSpawned = value
 
 func _ready():
 	velocity = Vector2.DOWN * fallSpeed
-	landedTimer.wait_time = randi() % 4 + 2
+	if plantSpawned:
+		landedTimer.wait_time = .25
+	else:
+		landedTimer.wait_time = randi() % 4 + 2
 	landedTimer.start()
 
 func _process(delta):

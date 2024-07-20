@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://components/DealDamageComponent.gd" id="1_a7xx3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pgy0k"]
+radius = 6.08276
 
 [node name="DealDamageComponent" type="Area2D"]
 collision_layer = 0
