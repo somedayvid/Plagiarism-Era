@@ -12,6 +12,9 @@ var mouseDown := false
 var justPressed := false
 var hand : Node2D
 var grid : Node2D
+var camera : Camera2D
+
+var cameraLawnFocus := true
 
 #gameStuff
 var sunCount := 100
@@ -26,8 +29,8 @@ const spriteSideLength := 96
 
 func _ready():
 	hand = get_tree().root.get_child(1).get_node("Hand")
-	grid = get_tree().root.get_child(1).get_node("Grid")
-	
+	grid = get_tree().root.get_child(1).get_node("LawnScene").get_node("Grid")
+	camera = get_tree().root.get_child(1).get_node("Camera2D")
 	matrixLength = grid.matrixLength
 
 func _process(delta):
@@ -36,8 +39,22 @@ func _process(delta):
 func mouseStuff():
 	hasSeed()
 	mousePress()
+	cameraMoving()
+	mousePosUpdates()
+
+func mousePosUpdates():
 	gridPos = grid.currentMouseGridPos
 	mousePos = get_viewport().get_mouse_position()
+	if !cameraLawnFocus:
+		mousePos.x -= 576.0 * 1.5
+
+func cameraMoving():
+	if Input.is_action_just_pressed("left"):
+		camera.global_position = Vector2(-288, 0)
+		cameraLawnFocus = false
+	if Input.is_action_just_pressed("right"):
+		camera.global_position = Vector2(576,0)
+		cameraLawnFocus = true
 
 func mousePress():
 	if Input.is_action_pressed("mouseAction"):
@@ -46,8 +63,9 @@ func mousePress():
 		mouseDown = false
 		if holdingSeed:
 			var heldItem = hand.get_child(0)
-			if grid.onGrid && sunCount >= heldItem.sunCost:
+			if grid.onGrid && sunCount >= heldItem.sunCost && !grid.placementGrid[gridPos.x][gridPos.y].hasPlant:
 				heldItem.global_position = grid.placementGrid[gridPos.x][gridPos.y].global_position
+				grid.placementGrid[gridPos.x][gridPos.y].hasPlant = true
 				heldItem.gridPos = gridPos
 				heldItem.beingHeld = false
 				hand.remove_child(heldItem)
