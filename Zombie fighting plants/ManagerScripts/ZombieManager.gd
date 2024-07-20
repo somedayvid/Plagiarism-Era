@@ -4,9 +4,9 @@ extends Node2D
 @export var basicZombie : PackedScene
 @export var coneZombie : PackedScene
 
-var difficulty := 0:
+var difficulty := 1:
 	set(value):
-		clamp(difficulty, 0, 25)
+		clamp(difficulty, 1, 100)
 var zombiesLeftToSpawn : int
 var zombies = []
 
@@ -36,5 +36,4 @@ func _on_time_between_zombie_spawns_timeout():
 	zombiesLeftToSpawn -= 1
 
 func decrementTimer():
-	if zombieTimer.wait_time >= .1:
-		zombieTimer.wait_time -= .1
+	zombieTimer.wait_time -= .1

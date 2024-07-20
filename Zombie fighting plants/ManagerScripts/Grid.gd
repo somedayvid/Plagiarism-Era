@@ -1,17 +1,16 @@
 extends Node2D
 
-const GROUND_TILE = preload("res://ground_tile.tscn")
 var placementGrid = []:
 	get:
 		return placementGrid
 var tile_container
 
-const matrixLength := 9
-const matrixHeight := 5
+@export var matrixLength := 9
+@export var matrixHeight := 5
 
-const startX := 128
-const startY := 168
-const spriteSideLength := 96
+@export var startX := 128
+@export var startY := 168
+@export var spriteSideLength := 96
 
 var currentMouseGridPos := Vector2.ZERO:
 	get:
@@ -44,24 +43,11 @@ func _ready() -> void:
 	var currentIndex = 0
 	for i in matrixLength:
 		var tempArray = []
-		for n in 5:
+		for n in matrixHeight:
 			tempArray.append(tileContainerList[currentIndex])
 			currentIndex += 1
 		placementGrid.append(tempArray)
-	#for i in matrixHeight:
-		#var tempArray = []
-		#placementGrid.append(tempArray)
-		#for n in matrixLength:
-			#var groundTileInstance = GROUND_TILE.instantiate()
-			#groundTileInstance.global_position = Vector2(n * 32, i * 32)
-			#tile_container.add_child(groundTileInstance)
-			#placementGrid[i].append(groundTileInstance)
 
-	#var count = -1
-	#for i in placementGrid:
-		#count += 1
-		#print(placementGrid[count])
-		#
 func _process(delta) -> void:
 	_change_mouse_pos()
 
