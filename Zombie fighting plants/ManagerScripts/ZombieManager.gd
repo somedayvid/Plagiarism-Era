@@ -2,28 +2,39 @@ extends Node2D
 @export var waveCounterDisplay := RichTextLabel
 
 @export var basicZombie : PackedScene
-@onready var zombie = $"../Zombie"
+@export var coneZombie : PackedScene
 
-var basicsToSpawn : int
-var currentWave := 0
-var zombiesToSpawn = []	
+var difficulty := 0:
+	set(value):
+		clamp(difficulty, 0, 25)
+var zombiesLeftToSpawn : int
+var zombies = []
+
+@onready var zombieTimer = $TimeBetweenZombieSpawns
+
+@onready var zombieList = $ZombieList
 
 func _ready():
-	currentWave += 1 
-	basicsToSpawn = 2
 	spawnWave()
 
 func _process(delta):
 	pass
 
 func spawnWave():
-	for zombie in basicsToSpawn:
-		spawnInRow(basicZombie)
+	zombieTimer.start()
 
 func spawnInRow(zombieToSpawn: PackedScene):
 	var zombieInstance = zombieToSpawn.instantiate()
-	zombieInstance.global_position = Vector2(1200, Singleton.spriteSideLength * rowToSpawnIn() + Singleton.startY)
-	get_parent().add_child.call_deferred(zombieInstance)
+	zombieInstance.global_position = Vector2(1200, Singleton.spriteSideLength * rowToSpawnIn() + Singleton.startY + Singleton.spriteSideLength/2)
+	zombieList.add_child.call_deferred(zombieInstance)
 
 func rowToSpawnIn():
 	return randi() % 5
+
+func _on_time_between_zombie_spawns_timeout():
+	spawnInRow(basicZombie)
+	zombiesLeftToSpawn -= 1
+
+func decrementTimer():
+	if zombieTimer.wait_time >= .1:
+		zombieTimer.wait_time -= .1
