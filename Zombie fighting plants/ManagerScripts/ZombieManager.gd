@@ -11,7 +11,6 @@ var zombiesLeftToSpawn : int
 var zombies = []
 
 @onready var zombieTimer = $TimeBetweenZombieSpawns
-
 @onready var zombieList = $ZombieList
 
 func _ready():
@@ -25,7 +24,8 @@ func spawnWave():
 
 func spawnInRow(zombieToSpawn: PackedScene):
 	var zombieInstance = zombieToSpawn.instantiate()
-	zombieInstance.global_position = Vector2(1200, Singleton.spriteSideLength * rowToSpawnIn() + Singleton.startY + Singleton.spriteSideLength/2)
+	zombieInstance.global_position = Vector2(1200, 
+		Singleton.spriteSideLength * rowToSpawnIn() + Singleton.startY + Singleton.spriteSideLength/2)
 	zombieList.add_child.call_deferred(zombieInstance)
 
 func rowToSpawnIn():

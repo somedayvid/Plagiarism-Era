@@ -6,10 +6,10 @@ var currentHealth
 func _ready() -> void:
 	currentHealth = maxHealth
 	
-func _take_damage(damageToTake: Attack):
+func takeDamage(damageToTake: Attack):
 	currentHealth -= damageToTake.damageOnHit
-	_die()
+	die()
 	
-func _die():
+func die():
 	if currentHealth <= 0:
 		get_parent().queue_free()

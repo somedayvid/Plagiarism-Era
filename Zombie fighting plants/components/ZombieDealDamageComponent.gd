@@ -21,8 +21,8 @@ func dealDamage():
 		var hpCom = eatingTarget.get_node("HealthComponent")
 		if hpCom == null:
 			pass
-		elif hpCom.has_method("_take_damage"):
-			hpCom._take_damage(damage)
+		elif hpCom.has_method("takeDamage"):
+			hpCom.takeDamage(damage)
 
 func _on_time_between_attacks_timeout():
 	dealDamage()

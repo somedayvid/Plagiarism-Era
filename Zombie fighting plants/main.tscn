@@ -241,6 +241,8 @@ basicZombie = ExtResource("9_ox23y")
 [node name="TimeBetweenZombieSpawns" type="Timer" parent="LawnScene/ZombieManager"]
 wait_time = 10.0
 
+[node name="DifficultyTimer" type="Timer" parent="LawnScene/ZombieManager"]
+
 [node name="GreenhouseScene" type="Node2D" parent="."]
 
 [node name="SeedShelf" type="Node2D" parent="GreenhouseScene"]
