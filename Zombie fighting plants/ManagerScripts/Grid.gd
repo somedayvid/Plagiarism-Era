@@ -7,10 +7,9 @@ var tile_container
 
 @export var matrixLength := 9
 @export var matrixHeight := 5
-
 @export var startX := 128
 @export var startY := 168
-@export var spriteSideLength := 96
+var spriteSideLength := 96
 
 var currentMouseGridPos := Vector2.ZERO:
 	get:
@@ -33,11 +32,9 @@ var gridY := 0.0:
 			gridY = -1.0
 		else:
 			gridY = value 
-var onGrid := false:
-	get:
-		return onGrid
 
 func _ready() -> void:
+	#collects tiles in gamescene for the grid
 	tile_container = get_child(0)
 	var tileContainerList = tile_container.get_children()
 	var currentIndex = 0
@@ -49,23 +46,25 @@ func _ready() -> void:
 		placementGrid.append(tempArray)
 
 func _process(delta) -> void:
-	_change_mouse_pos()
+	updateMousePos()
+	gridCheck()
 
+##checks if mouse is on grid and updates tiles to highlight when hovered
+func gridCheck():
+		#checks if the mouse grid pos is within the grid 
 	if ((currentMouseGridPos.x >= 0 && currentMouseGridPos.x <= matrixLength - 1) 
-	&& (previousMouseGridPos.y >= 0 && previousMouseGridPos.y <= matrixHeight - 1)):
-		onGrid = true
-		if placementGrid[currentMouseGridPos.x][previousMouseGridPos.y].lit != true:
-			placementGrid[currentMouseGridPos.x][previousMouseGridPos.y].lit = true
-			placementGrid[currentMouseGridPos.x][previousMouseGridPos.y]._highlight()
+	&& (currentMouseGridPos.y >= 0 && currentMouseGridPos.y <= matrixHeight - 1)):
+		#if so then highlights all tiles the mouse hovers over and dehighlights any that are no longer hovered over
+		if placementGrid[currentMouseGridPos.x][currentMouseGridPos.y].lit != true:
+			placementGrid[currentMouseGridPos.x][currentMouseGridPos.y].highlight()
 		if previousMouseGridPos != currentMouseGridPos:
-			placementGrid[previousMouseGridPos.x][previousMouseGridPos.y].lit = false
-			placementGrid[previousMouseGridPos.x][previousMouseGridPos.y]._dehighlight()
-	else:
-		onGrid = false
-	
+			placementGrid[previousMouseGridPos.x][previousMouseGridPos.y].dehighlight()
+	else: #dehighlights once mouse is off grid
+		placementGrid[previousMouseGridPos.x][previousMouseGridPos.y].dehighlight() 
 	previousMouseGridPos = currentMouseGridPos
-	
-func _change_mouse_pos():
+
+##responsible for updating mouse's position on the grid 
+func updateMousePos():
 	gridX = (Singleton.mousePos.x - startX)/spriteSideLength
 	gridY = (Singleton.mousePos.y - startY)/spriteSideLength
 	currentMouseGridPos = Vector2(floor(gridX), floor(gridY))
