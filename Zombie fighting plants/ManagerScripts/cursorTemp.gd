@@ -1,6 +1,9 @@
 extends Area2D
 
 var item
+var type = "Cursor":
+	get:
+		return type
 
 func _process(delta):
 	global_position = Singleton.mousePos

@@ -20,7 +20,12 @@ var currentGrid : Node2D
 var cameraLawnFocus := true
 
 #gameStuff
-var sunCount := 100
+var sunCount := 50
+
+const thirstAffliction = preload("res://components/Afflictions/thirsty.tscn")
+const lackSunAffliction = preload("res://components/Afflictions/sun_lacking.tscn")
+const lackNutrientAffliction = preload("res://components/Afflictions/nutrient_lacking.tscn")
+const lackSprayAffliction = preload("res://components/Afflictions/spray_lacking.tscn")
 
 #grid stuff for other classes
 var matrixLength := 9
@@ -36,7 +41,6 @@ func _ready():
 	planterGrid = get_tree().root.get_child(1).get_node("GreenhouseScene").get_node("PlanterGrid")
 	camera = get_tree().root.get_child(1).get_node("Camera2D")
 	currentGrid = lawnGrid
-	matrixLength = lawnGrid.matrixLength
 
 func _process(delta):
 	mouseStuff()

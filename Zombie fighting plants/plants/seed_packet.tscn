@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cuuu7c6puv40g" path="res://assets/Sprite-0001.png" id="2_24a3q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5c6no"]
-size = Vector2(26, 26)
+size = Vector2(29.3333, 29.3333)
 
 [node name="SeedPacket" type="Node2D"]
 scale = Vector2(3, 3)
@@ -20,3 +20,6 @@ texture = ExtResource("2_24a3q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_5c6no")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

@@ -5,15 +5,15 @@
 [ext_resource type="Script" path="res://scripts/SunSpawningComponent.gd" id="3_n7hkg"]
 [ext_resource type="PackedScene" uid="uid://duom6j2fnxrph" path="res://ManagerScripts/sun.tscn" id="4_p4iaj"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2dtvt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1jpj"]
 atlas = ExtResource("2_y6fab")
-region = Rect2(192, 96, 32, 32)
+region = Rect2(192, 102, 32, 34)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lfsjj"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_efahi"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2dtvt")
+"texture": SubResource("AtlasTexture_n1jpj")
 }],
 "loop": true,
 "name": &"default",
@@ -22,11 +22,11 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2jje8"]
 
-[node name="PlantParent" instance=ExtResource("1_yi16b")]
+[node name="SunFlower" instance=ExtResource("1_yi16b")]
 sunCost = 50
 
 [node name="Animation" parent="." index="0"]
-sprite_frames = SubResource("SpriteFrames_lfsjj")
+sprite_frames = SubResource("SpriteFrames_efahi")
 flip_h = true
 
 [node name="CollisionShape2D" parent="." index="1"]

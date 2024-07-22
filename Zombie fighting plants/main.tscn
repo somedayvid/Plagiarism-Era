@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://biwfynwotkj13"]
+[gd_scene load_steps=12 format=3 uid="uid://biwfynwotkj13"]
 
 [ext_resource type="Script" path="res://ManagerScripts/Grid.gd" id="1_mtwp2"]
 [ext_resource type="PackedScene" uid="uid://cjl7fl1a2ujim" path="res://ground_tile.tscn" id="2_b0dik"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://ManagerScripts/ZombieManager.gd" id="8_wi4sl"]
 [ext_resource type="PackedScene" uid="uid://hnseygyo4u4l" path="res://enemies/zombie.tscn" id="9_ox23y"]
 [ext_resource type="PackedScene" uid="uid://bkrl8yr1ytgdx" path="res://planter_tile.tscn" id="10_l1mra"]
+[ext_resource type="PackedScene" uid="uid://dctyf5w8bjbf2" path="res://watering_can.tscn" id="11_0utfe"]
 
 [node name="Main" type="Node2D"]
 
@@ -243,6 +244,9 @@ wait_time = 10.0
 
 [node name="DifficultyTimer" type="Timer" parent="LawnScene/ZombieManager"]
 
+[node name="WateringCan2" parent="LawnScene" instance=ExtResource("11_0utfe")]
+position = Vector2(71, 600)
+
 [node name="GreenhouseScene" type="Node2D" parent="."]
 
 [node name="SeedShelf" type="Node2D" parent="GreenhouseScene"]
@@ -305,6 +309,8 @@ position = Vector2(-264, 312)
 position = Vector2(-264, 408)
 
 [node name="PlantContainer" type="Node2D" parent="GreenhouseScene/PlanterGrid"]
+
+[node name="TimeCycle" type="Node2D" parent="."]
 
 [connection signal="timeout" from="LawnScene/SunManager/SunSpawn" to="LawnScene/SunManager" method="_on_sun_spawn_timeout"]
 [connection signal="timeout" from="LawnScene/ZombieManager/TimeBetweenZombieSpawns" to="LawnScene/ZombieManager" method="_on_time_between_zombie_spawns_timeout"]
