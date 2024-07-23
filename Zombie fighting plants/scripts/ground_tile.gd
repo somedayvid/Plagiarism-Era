@@ -10,8 +10,8 @@ var hasPlant := false:
 		hasPlant = value
 
 func highlight():
-	modulate = Color8(0,0,255,255)
+	self_modulate = Color8(0,0,255,255)
 	lit = true
 func dehighlight():
-	modulate = Color8(255,255,255,255)
+	self_modulate = Color8(255,255,255,255)
 	lit = false

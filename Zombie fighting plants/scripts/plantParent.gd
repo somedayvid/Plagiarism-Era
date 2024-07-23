@@ -21,8 +21,15 @@ var gridPos := Vector2.ZERO:
 var type = "Plant"
 @onready var animation = $Animation
 
+var actionDelay := 1.0:
+	get:
+		return actionDelay
+
 var currentGrowthStage := 0
 var maxGrowthStage := 4
+
+var happinessToGrow : int
+var currentHappiness
 
 @onready var waterTimer = $TimerContainer/NeedsWater
 @onready var fertilizerTimer = $TimerContainer/NeedsFertilizer
@@ -61,7 +68,7 @@ func _process(delta) -> void:
 
 func _on_needs_water_timeout():
 	var instance = Singleton.thirstAffliction.instantiate()
-	instance.global_position = Vector2.ZERO
+	instance.position = Vector2(-10, -10)
 	afflictions.add_child(instance)
 
 func _on_needs_fertilizer_timeout():
@@ -78,9 +85,23 @@ func _on_afflictions_child_entered_tree(node):
 	match(name):
 		"Thirsty":
 			thirsty = true
+			actionDelay += .2
 		"NutrientLacking":
-			pass
+			actionDelay += .2
 		"SunLacking":
-			pass
+			actionDelay += .2
 		"SprayLacking":
-			pass
+			actionDelay += .2
+
+func _on_afflictions_child_exiting_tree(node):
+	var name = node.get_name()
+	match(name):
+		"Thirsty":
+			thirsty = false
+			actionDelay -= .2
+		"NutrientLacking":
+			actionDelay -= .2
+		"SunLacking":
+			actionDelay -= .2
+		"SprayLacking":
+			actionDelay -= .2

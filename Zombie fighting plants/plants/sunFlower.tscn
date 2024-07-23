@@ -37,7 +37,7 @@ script = ExtResource("3_n7hkg")
 scene = ExtResource("4_p4iaj")
 
 [node name="TimeBetweenSunSpawn" type="Timer" parent="." index="3"]
-wait_time = 24.0
+wait_time = 4.0
 
 [node name="Marker2D" type="Marker2D" parent="." index="4"]
 

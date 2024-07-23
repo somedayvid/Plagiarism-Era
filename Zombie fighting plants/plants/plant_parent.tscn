@@ -4,12 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://dnqsky3mq0na" path="res://components/health_component.tscn" id="2_73ln2"]
 
 [node name="PlantParent" type="Area2D"]
+z_index = 10
 scale = Vector2(3, 3)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_bespy")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
+z_index = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -34,6 +36,8 @@ autostart = true
 one_shot = true
 autostart = true
 
+[node name="NormalHappinessGrowth" type="Timer" parent="TimerContainer"]
+
 [node name="Afflictions" type="Node2D" parent="."]
 
 [connection signal="timeout" from="TimerContainer/NeedsWater" to="." method="_on_needs_water_timeout"]
@@ -41,3 +45,4 @@ autostart = true
 [connection signal="timeout" from="TimerContainer/NeedsSun" to="." method="_on_needs_sun_timeout"]
 [connection signal="timeout" from="TimerContainer/NeedsSpray" to="." method="_on_needs_spray_timeout"]
 [connection signal="child_entered_tree" from="Afflictions" to="." method="_on_afflictions_child_entered_tree"]
+[connection signal="child_exiting_tree" from="Afflictions" to="." method="_on_afflictions_child_exiting_tree"]

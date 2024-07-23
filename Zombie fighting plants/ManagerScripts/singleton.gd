@@ -81,7 +81,7 @@ func mousePress():
 				heldItem.gridPos = gridPos
 				heldItem.beingHeld = false
 				hand.remove_child(heldItem)
-				get_tree().root.get_child(1).add_child(heldItem)
+				currentGrid.get_child(1).add_child(heldItem)
 				#maybe move this somewhere else once things work! :)
 				sunCount -= heldItem.sunCost
 			else:

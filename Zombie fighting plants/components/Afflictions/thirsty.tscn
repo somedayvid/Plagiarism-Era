@@ -1,5 +1,23 @@
-[gd_scene format=3 uid="uid://c13upqubths1t"]
+[gd_scene load_steps=4 format=3 uid="uid://c13upqubths1t"]
+
+[ext_resource type="Texture2D" uid="uid://docujnpbcdu8l" path="res://assets/items.png" id="1_3nh53"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkj0l"]
+atlas = ExtResource("1_3nh53")
+region = Rect2(96, 640, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pi448"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkj0l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Thirsty" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pi448")

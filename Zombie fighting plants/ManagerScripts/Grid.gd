@@ -59,6 +59,7 @@ func gridCheck():
 			placementGrid[currentMouseGridPos.x][currentMouseGridPos.y].highlight()
 		if previousMouseGridPos != currentMouseGridPos:
 			placementGrid[previousMouseGridPos.x][previousMouseGridPos.y].dehighlight()
+		Singleton.currentGrid = self
 	else: #dehighlights once mouse is off grid
 		placementGrid[previousMouseGridPos.x][previousMouseGridPos.y].dehighlight() 
 	previousMouseGridPos = currentMouseGridPos

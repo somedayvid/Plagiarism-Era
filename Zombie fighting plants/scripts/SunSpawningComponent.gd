@@ -6,6 +6,8 @@ extends Node2D
 
 func _on_plant_parent_start_action():
 	time_between_sun_spawn.start()
+	if time_between_sun_spawn.wait_time != 24.0 * get_parent().actionDelay:
+		time_between_sun_spawn.wait_time = 24.0 * get_parent().actionDelay
 
 func _on_time_between_sun_spawn_timeout():
 	spawnSun()
