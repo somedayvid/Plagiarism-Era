@@ -25,9 +25,8 @@ func _process(delta) -> void:
 func _on_area_2d_area_entered(area):
 	if area.type == "Cursor":
 		hovered = true
-	if area.type == "Plant":
-		if area.thirsty:
-			area.thirsty = false
+	if area.type == "Plant" && area.thirsty:
+		area.removeAffliction()
 
 func _on_area_2d_area_exited(area):
 	if area.type == "Cursor":

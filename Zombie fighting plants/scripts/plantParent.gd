@@ -86,6 +86,7 @@ func _on_afflictions_child_entered_tree(node):
 		"Thirsty":
 			thirsty = true
 			actionDelay += .2
+			waterTimer.stop()
 		"NutrientLacking":
 			actionDelay += .2
 		"SunLacking":
@@ -99,9 +100,15 @@ func _on_afflictions_child_exiting_tree(node):
 		"Thirsty":
 			thirsty = false
 			actionDelay -= .2
+			waterTimer.start()
 		"NutrientLacking":
 			actionDelay -= .2
 		"SunLacking":
 			actionDelay -= .2
 		"SprayLacking":
 			actionDelay -= .2
+
+func removeAffliction():
+	if afflictions.get_child_count() != 0:
+		var affliction = afflictions.get_node("Thirsty")
+		affliction.queue_free()
