@@ -37,6 +37,7 @@ one_shot = true
 autostart = true
 
 [node name="NormalHappinessGrowth" type="Timer" parent="TimerContainer"]
+wait_time = 0.5
 
 [node name="Afflictions" type="Node2D" parent="."]
 
@@ -44,5 +45,6 @@ autostart = true
 [connection signal="timeout" from="TimerContainer/NeedsFertilizer" to="." method="_on_needs_fertilizer_timeout"]
 [connection signal="timeout" from="TimerContainer/NeedsSun" to="." method="_on_needs_sun_timeout"]
 [connection signal="timeout" from="TimerContainer/NeedsSpray" to="." method="_on_needs_spray_timeout"]
+[connection signal="timeout" from="TimerContainer/NormalHappinessGrowth" to="." method="_on_normal_happiness_growth_timeout"]
 [connection signal="child_entered_tree" from="Afflictions" to="." method="_on_afflictions_child_entered_tree"]
 [connection signal="child_exiting_tree" from="Afflictions" to="." method="_on_afflictions_child_exiting_tree"]

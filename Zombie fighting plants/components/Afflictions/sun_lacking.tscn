@@ -1,3 +1,21 @@
-[gd_scene format=3 uid="uid://exyf3wk5pmdw"]
+[gd_scene load_steps=4 format=3 uid="uid://exyf3wk5pmdw"]
 
-[node name="SunLacking" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://docujnpbcdu8l" path="res://assets/items.png" id="1_acjcv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdfcl"]
+atlas = ExtResource("1_acjcv")
+region = Rect2(0, 640, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3b6f1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdfcl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="SunLacking" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_3b6f1")
