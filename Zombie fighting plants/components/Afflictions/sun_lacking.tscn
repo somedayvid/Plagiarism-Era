@@ -18,4 +18,5 @@ animations = [{
 }]
 
 [node name="SunLacking" type="AnimatedSprite2D"]
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_3b6f1")

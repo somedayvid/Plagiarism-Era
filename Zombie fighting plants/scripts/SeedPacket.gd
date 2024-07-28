@@ -12,8 +12,6 @@ func _ready():
 		var instance = scene.instantiate()
 		instance.staticImage = true
 		instance.position = Vector2.ZERO
-		instance.scale.x = 1
-		instance.scale.y = 1
 		add_child(instance)
 	
 		costToPlant = instance.sunCost

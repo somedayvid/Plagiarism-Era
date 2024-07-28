@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://i7irs85xolx6"]
+[gd_scene load_steps=7 format=3 uid="uid://i7irs85xolx6"]
 
 [ext_resource type="PackedScene" uid="uid://c74u20fgko2rr" path="res://plants/plant_parent.tscn" id="1_q37s1"]
 [ext_resource type="Texture2D" uid="uid://h14ms64v4tpq" path="res://assets/animals.png" id="2_ir4x4"]
@@ -20,8 +20,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8n1sf"]
-
 [node name="PeaShooter" node_paths=PackedStringArray("actionNode") instance=ExtResource("1_q37s1")]
 sunCost = 100
 actionNode = NodePath("ShootingComponent")
@@ -29,9 +27,6 @@ actionNode = NodePath("ShootingComponent")
 [node name="Animation" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_x3i6q")
 flip_h = true
-
-[node name="CollisionShape2D" parent="." index="1"]
-shape = SubResource("RectangleShape2D_8n1sf")
 
 [node name="BulletPoint" type="Marker2D" parent="." index="2"]
 position = Vector2(13, -8)
@@ -45,6 +40,7 @@ scene = ExtResource("4_msb3y")
 
 [node name="ZombieDetection" type="RayCast2D" parent="." index="6"]
 target_position = Vector2(300, 0)
+collision_mask = 2
 
 [connection signal="startAction" from="." to="ShootingComponent" method="_on_plant_parent_start_action"]
 [connection signal="startAction" from="." to="ShootingComponent" method="_on_pea_shooter_start_action"]

@@ -28,15 +28,13 @@ var actionDelay := 1.0:
 	get:
 		return actionDelay
 
-var currentGrowthStage := 0:
-	set(value):
-		clamp(maxGrowthStage, 0, 4)
+var currentGrowthStage := 0
 var maxGrowthStage := 4
+var canGrow := true
 
-var happinessToGrow : int
-var currentHappiness := 25:
-	set(value):
-		clamp(currentHappiness, 0, 100)
+var happinessToGrow := 100
+var currentHappiness := 25
+var currentHappinessGain := 1
 
 @onready var waterTimer = $TimerContainer/NeedsWater
 @onready var fertilizerTimer = $TimerContainer/NeedsFertilizer
@@ -44,10 +42,12 @@ var currentHappiness := 25:
 @onready var sprayTimer = $TimerContainer/NeedsSpray
 @onready var happyRateTimer = $TimerContainer/NormalHappinessGrowth
 
-@export var waterTiming := 1.0
-@export var fertilizerTiming := 1.0
-@export var sunTiming := 1.0
-@export var sprayTiming := 1.0
+var tempTime := 1.0
+
+@export var waterTiming := tempTime
+@export var fertilizerTiming := tempTime
+@export var sunTiming := tempTime
+@export var sprayTiming := tempTime
 
 var thirsty := false:
 	get:
@@ -60,10 +60,16 @@ var thirsty := false:
 signal startAction
 
 func _ready():
-	waterTimer.wait_time = waterTiming
-	fertilizerTimer.wait_time = fertilizerTiming
-	sunTimer.wait_time = sunTiming
-	sprayTimer.wait_time = sprayTiming
+	if !staticImage:
+		waterTimer.wait_time = waterTiming
+		fertilizerTimer.wait_time = fertilizerTiming
+		sunTimer.wait_time = sunTiming
+		sprayTimer.wait_time = sprayTiming
+		
+		waterTimer.start()
+		fertilizerTimer.start()
+		sunTimer.start()
+		sprayTimer.start()
 
 func _process(delta) -> void:
 	if !staticImage:
@@ -74,6 +80,11 @@ func _process(delta) -> void:
 				startAction.emit()
 				canAction = true
 				happyRateTimer.start()
+	if canAction && canGrow:
+		if currentHappiness >= happinessToGrow:
+			advanceGrowthStage()
+	if currentHappiness <= 0:
+		die()
 
 func _on_needs_water_timeout():
 	var instance = Singleton.thirstAffliction.instantiate()
@@ -108,6 +119,15 @@ func _on_afflictions_child_entered_tree(node):
 			actionDelay += .2
 		"SprayLacking":
 			actionDelay += .2
+	currentHappinessGain -= 1
+	
+	#var timeLeft = happyRateTimer.time_left
+	#var elapsedTime = happyRateTimer.wait_time - timeLeft
+	#happyRateTimer.stop()
+	#happyRateTimer.wait_time = timeLeft + .25
+	#happyRateTimer.start()
+	#happyRateTimer.wait_time = elapsedTime + timeLeft 
+	#happyRateTimer.wait_time += .25
 
 func _on_afflictions_child_exiting_tree(node):
 	var name = node.get_name()
@@ -122,6 +142,7 @@ func _on_afflictions_child_exiting_tree(node):
 			actionDelay -= .2
 		"SprayLacking":
 			actionDelay -= .2
+	currentHappinessGain += 1
 
 func removeAffliction():
 	if afflictions.get_child_count() != 0:
@@ -129,8 +150,15 @@ func removeAffliction():
 		affliction.queue_free()
 
 func advanceGrowthStage():
-	currentGrowthStage += 1
-	currentHappiness = 25
+	if currentGrowthStage < maxGrowthStage:
+		currentGrowthStage += 1
+		currentHappiness = 25
+		animation.scale += Vector2(.5,.5)
+	else:
+		canGrow = false
 
 func _on_normal_happiness_growth_timeout():
-	currentHappiness += 1
+	currentHappiness += currentHappinessGain
+func die():
+	canAction = false
+	animation.self_modulate = Color8(20,40,80)
