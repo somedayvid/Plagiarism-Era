@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 
 var beingHeld := false:
 	get:
@@ -9,6 +9,9 @@ var type = "Item"
 var packetRect 
 var startingPos := Vector2.ZERO
 var hovered := false
+
+#0: water, 1: spray, 2: fertilizer, 3: sun
+@export_range(0,3) var number : int
 
 func _ready():
 	startingPos = global_position
@@ -25,8 +28,8 @@ func _process(delta) -> void:
 func _on_area_2d_area_entered(area):
 	if area.type == "Cursor":
 		hovered = true
-	if area.type == "Plant" && area.thirsty:
-		area.removeAffliction()
+	if area.type == "Plant" && area.afflictionIndex == number:
+		area.removeAffliction(number)
 
 func _on_area_2d_area_exited(area):
 	if area.type == "Cursor":

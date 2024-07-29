@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://biwfynwotkj13"]
+[gd_scene load_steps=15 format=3 uid="uid://biwfynwotkj13"]
 
 [ext_resource type="Script" path="res://ManagerScripts/Grid.gd" id="1_mtwp2"]
 [ext_resource type="PackedScene" uid="uid://cjl7fl1a2ujim" path="res://ground_tile.tscn" id="2_b0dik"]
@@ -7,10 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://byu2kdav0esxe" path="res://ManagerScripts/cursorTemp.tscn" id="6_c22bv"]
 [ext_resource type="Script" path="res://ManagerScripts/SunManager.gd" id="6_gbf2e"]
 [ext_resource type="PackedScene" uid="uid://d06k8uhx66jr4" path="res://plants/sunFlower.tscn" id="7_4eh8j"]
+[ext_resource type="PackedScene" uid="uid://d20t5417075g3" path="res://items/watering_can.tscn" id="7_hfnh8"]
+[ext_resource type="PackedScene" uid="uid://bb03qgbatgn1s" path="res://items/spray.tscn" id="8_lp77l"]
 [ext_resource type="Script" path="res://ManagerScripts/ZombieManager.gd" id="8_wi4sl"]
 [ext_resource type="PackedScene" uid="uid://hnseygyo4u4l" path="res://enemies/zombie.tscn" id="9_ox23y"]
+[ext_resource type="PackedScene" uid="uid://bxkt0p4sl655m" path="res://items/fertilizer.tscn" id="9_s8kss"]
+[ext_resource type="PackedScene" uid="uid://deo7x2oe3adld" path="res://items/sun_item.tscn" id="10_605q2"]
 [ext_resource type="PackedScene" uid="uid://bkrl8yr1ytgdx" path="res://planter_tile.tscn" id="10_l1mra"]
-[ext_resource type="PackedScene" uid="uid://dctyf5w8bjbf2" path="res://watering_can.tscn" id="11_0utfe"]
 
 [node name="Main" type="Node2D"]
 
@@ -21,7 +24,7 @@ z_index = 2
 position = Vector2(-2, 175)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 228)
+position = Vector2(576, 224)
 limit_left = -1152
 limit_top = 0
 limit_right = 1152
@@ -34,8 +37,7 @@ position_smoothing_enabled = true
 [node name="Grid" type="Node2D" parent="LawnScene"]
 script = ExtResource("1_mtwp2")
 matrixHeight = 6
-startX = 176
-startY = 120
+startY = 72
 
 [node name="GroundTileContainer" type="Node2D" parent="LawnScene/Grid"]
 
@@ -266,9 +268,9 @@ autostart = true
 
 [node name="TextEdit" type="TextEdit" parent="LawnScene/SunManager"]
 offset_left = 16.0
-offset_top = 31.0
+offset_top = 80.0
 offset_right = 109.0
-offset_bottom = 99.0
+offset_bottom = 148.0
 
 [node name="SunList" type="Node2D" parent="LawnScene/SunManager"]
 
@@ -283,8 +285,23 @@ wait_time = 10.0
 
 [node name="DifficultyTimer" type="Timer" parent="LawnScene/ZombieManager"]
 
-[node name="WateringCan2" parent="LawnScene" instance=ExtResource("11_0utfe")]
-position = Vector2(71, 600)
+[node name="UsableItems" type="Node2D" parent="LawnScene"]
+
+[node name="WateringCan" parent="LawnScene/UsableItems" instance=ExtResource("7_hfnh8")]
+position = Vector2(64, 248)
+number = 0
+
+[node name="Spray" parent="LawnScene/UsableItems" instance=ExtResource("8_lp77l")]
+position = Vector2(64, 408)
+number = 0
+
+[node name="Fertilizer" parent="LawnScene/UsableItems" instance=ExtResource("9_s8kss")]
+position = Vector2(64, 328)
+number = 0
+
+[node name="SunItem" parent="LawnScene/UsableItems" instance=ExtResource("10_605q2")]
+position = Vector2(64, 40)
+number = 0
 
 [node name="GreenhouseScene" type="Node2D" parent="."]
 
@@ -315,8 +332,8 @@ position = Vector2(100, 472)
 script = ExtResource("1_mtwp2")
 matrixLength = 2
 matrixHeight = 6
-startX = -552
-startY = 120
+startX = -600
+startY = 72
 
 [node name="PlanterContainer" type="Node2D" parent="GreenhouseScene/PlanterGrid"]
 

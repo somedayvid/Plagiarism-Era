@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://deo7x2oe3adld"]
+
+[ext_resource type="PackedScene" uid="uid://dctyf5w8bjbf2" path="res://items/item_parent.tscn" id="1_qig5b"]
+[ext_resource type="Texture2D" uid="uid://df4qlc13fndkx" path="res://assets/sun.png" id="2_2fabu"]
+
+[node name="SunItem" instance=ExtResource("1_qig5b")]
+
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(-4.76837e-07, 4.76837e-07)
+scale = Vector2(0.383789, 0.383789)
+texture = ExtResource("2_2fabu")

@@ -23,6 +23,7 @@ var type = "Plant"
 
 #0 for greenhouse, 1 for lawn
 var currentPlace = 0
+var lawnReady := false
 
 var actionDelay := 1.0:
 	get:
@@ -49,6 +50,8 @@ var tempTime := 1.0
 @export var sunTiming := tempTime
 @export var sprayTiming := tempTime
 
+var afflictionTimingsList = []
+
 var thirsty := false:
 	get:
 		return thirsty
@@ -56,6 +59,8 @@ var thirsty := false:
 		thirsty = value
 
 @onready var afflictions = $Afflictions
+
+var currentAfflictionDict = {0:false, 1:false, 2:false, 3:false}
 
 signal startAction
 
@@ -85,6 +90,8 @@ func _process(delta) -> void:
 			advanceGrowthStage()
 	if currentHappiness <= 0:
 		die()
+	if !lawnReady && currentGrowthStage >= 2:
+		lawnReady = true
 
 func _on_needs_water_timeout():
 	var instance = Singleton.thirstAffliction.instantiate()
