@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://hnseygyo4u4l"]
 
+[ext_resource type="Script" path="res://enemies/ZombieMovement.gd" id="1_pug5d"]
 [ext_resource type="Texture2D" uid="uid://dvugjt8ulol2l" path="res://assets/monsters.png" id="1_qpupw"]
-[ext_resource type="Script" path="res://enemies/HorizontalMovement.gd" id="1_wbsqj"]
 [ext_resource type="PackedScene" uid="uid://dnqsky3mq0na" path="res://components/health_component.tscn" id="3_tbtfd"]
 [ext_resource type="Script" path="res://components/ZombieDealDamageComponent.gd" id="4_n8tq7"]
 
@@ -30,8 +30,8 @@ size = Vector2(9.66667, 20)
 scale = Vector2(3, 3)
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("1_wbsqj")
-moveSpeed = 15.0
+script = ExtResource("1_pug5d")
+moveSpeed = 30.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.5)
