@@ -20,7 +20,7 @@ var currentGrid : Node2D
 var cameraLawnFocus := true
 
 #gameStuff
-var sunCount := 50
+var sunCount := 100
 
 const thirstAffliction = preload("res://components/Afflictions/thirsty.tscn")
 const lackSunAffliction = preload("res://components/Afflictions/sun_lacking.tscn")
@@ -76,14 +76,17 @@ func mousePress():
 			var heldItem = hand.get_child(0)
 			if (currentGrid.currentMouseGridPos.x > -1 && currentGrid.currentMouseGridPos.y > -1 
 			&& sunCount >= heldItem.sunCost && !currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant):
-				heldItem.global_position = currentGrid.placementGrid[gridPos.x][gridPos.y].global_position
-				currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant = true
-				heldItem.gridPos = gridPos
-				heldItem.beingHeld = false
-				hand.remove_child(heldItem)
-				currentGrid.get_child(1).add_child(heldItem)
-				#maybe move this somewhere else once things work! :)
-				sunCount -= heldItem.sunCost
+				if currentGrid == lawnGrid && !heldItem.lawnReady:
+					heldItem.queue_free()
+				else:
+					heldItem.global_position = currentGrid.placementGrid[gridPos.x][gridPos.y].global_position
+					currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant = true
+					heldItem.gridPos = gridPos
+					heldItem.beingHeld = false
+					hand.remove_child(heldItem)
+					currentGrid.get_child(1).add_child(heldItem)
+					#maybe move this somewhere else once things work! :)
+					sunCount -= heldItem.sunCost
 			else:
 				heldItem.queue_free()
 
