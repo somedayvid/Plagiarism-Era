@@ -1,11 +1,9 @@
 extends Node2D
 
-@export var damageOnHit := 20.0
 var damage
 
 func _ready():
-	damage = Attack.new()
-	damage.damageOnHit = damageOnHit
+	damage = Attack.new(get_parent().damage)
 
 func _on_body_entered(body):
 	var hpCom = body.get_node("HealthComponent")

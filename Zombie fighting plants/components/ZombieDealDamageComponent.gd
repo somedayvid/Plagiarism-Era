@@ -7,8 +7,7 @@ var damage
 var eatingTarget 
 
 func _ready():
-	damage = Attack.new()
-	damage.damageOnHit = damageOnHit
+	damage = Attack.new(get_parent().damage)
 	attackTimer.wait_time = timeBetweenAttack
 
 func _process(delta):
