@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://00vati4gfiry"]
+
+[node name="CompostBin" type="Node2D"]
