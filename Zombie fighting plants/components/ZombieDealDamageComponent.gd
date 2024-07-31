@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var damageOnHit := 10.0
+@export var damageOnHit := 100.0
 @export var timeBetweenAttack := 1.0
 var damage
 @onready var attackTimer = $TimeBetweenAttacks

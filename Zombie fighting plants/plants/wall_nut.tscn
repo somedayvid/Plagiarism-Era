@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://mj62nc0ob3j7"]
+
+[ext_resource type="PackedScene" uid="uid://c74u20fgko2rr" path="res://plants/plant_parent.tscn" id="1_afl2h"]
+[ext_resource type="Texture2D" uid="uid://h14ms64v4tpq" path="res://assets/animals.png" id="2_s2y7c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ttn0"]
+atlas = ExtResource("2_s2y7c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ub8og"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ttn0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="WallNut" instance=ExtResource("1_afl2h")]
+
+[node name="Animation" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_ub8og")
+flip_h = true
+
+[node name="HealthComponent" parent="." index="2"]
+maxHealth = 4000.0
