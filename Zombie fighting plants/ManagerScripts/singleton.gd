@@ -31,6 +31,11 @@ const startX := 128
 const startY := 168
 const spriteSideLength := 96
 
+const lackNutrientAffliction = preload("res://components/Afflictions/nutrient_lacking.tscn")
+const lackSprayAffliction = preload("res://components/Afflictions/spray_lacking.tscn")
+const lackSunAffliction = preload("res://components/Afflictions/sun_lacking.tscn")
+const thirstAffliction = preload("res://components/Afflictions/thirsty.tscn")
+
 func _ready():
 	hand = get_tree().root.get_child(1).get_node("Hand")
 	lawnGrid = get_tree().root.get_child(1).get_node("LawnScene").get_node("Grid")

@@ -174,23 +174,22 @@ func die():
 
 #0: water, 1: spray, 2: fertilizer, 3: sun
 func _on_area_entered(area):
-	match(area.name):
+	print(area.get_parent().name)
+	match(area.get_parent().name):
 		"WateringCan":
-			if afflictions.has_child("Thirsty"):
+			if afflictions.has_node("Thirsty"):
 				removeAffliction("Thirsty")
 		"Spray":
-			if afflictions.has_child("SprayLacking"):
+			if afflictions.has_node("SprayLacking"):
 				removeAffliction("SprayLacking")
 		"Fertilizer":
-			if afflictions.has_child("NutrientLacking"):
+			if afflictions.has_node("NutrientLacking"):
 				removeAffliction("NutrientLacking")
 		"SunItem":
-			if afflictions.has_child("SunLacking"):
+			if afflictions.has_node("SunLacking"):
 				removeAffliction("SunLacking")
-		"Shovel":
-			pass
 		_:
 			pass
-			
+				
 func deleteFromScene():
 	queue_free()
