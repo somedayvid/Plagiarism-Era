@@ -14,6 +14,7 @@ var hand : Node2D
 var lawnGrid : Node2D
 var planterGrid : Node2D
 var camera : Camera2D
+var compostBin : Node2D
 
 var currentGrid : Node2D
 
@@ -21,11 +22,6 @@ var cameraLawnFocus := true
 
 #gameStuff
 var sunCount := 100
-
-const thirstAffliction = preload("res://components/Afflictions/thirsty.tscn")
-const lackSunAffliction = preload("res://components/Afflictions/sun_lacking.tscn")
-const lackNutrientAffliction = preload("res://components/Afflictions/nutrient_lacking.tscn")
-const lackSprayAffliction = preload("res://components/Afflictions/spray_lacking.tscn")
 
 #grid stuff for other classes
 var matrixLength := 9
@@ -40,6 +36,8 @@ func _ready():
 	lawnGrid = get_tree().root.get_child(1).get_node("LawnScene").get_node("Grid")
 	planterGrid = get_tree().root.get_child(1).get_node("GreenhouseScene").get_node("PlanterGrid")
 	camera = get_tree().root.get_child(1).get_node("Camera2D")
+	compostBin = get_tree().root.get_child(1).get_node("CompostBin")
+	
 	currentGrid = lawnGrid
 
 func _process(delta):
@@ -68,16 +66,16 @@ func cameraMoving():
 		currentGrid = lawnGrid
 
 func mousePress():
-	if Input.is_action_pressed("mouseAction"):
+	if Input.is_action_pressed("mainAction"):
 		mouseDown = true
-	if Input.is_action_just_released("mouseAction"):
+	if Input.is_action_just_released("mainAction"):
 		mouseDown = false
 		if holdingSeed:
 			var heldItem = hand.get_child(0)
 			if (currentGrid.currentMouseGridPos.x > -1 && currentGrid.currentMouseGridPos.y > -1 
 			&& sunCount >= heldItem.sunCost && !currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant):
 				if currentGrid == lawnGrid && !heldItem.lawnReady:
-					heldItem.queue_free()
+					deleteFromScene(heldItem)
 				else:
 					heldItem.global_position = currentGrid.placementGrid[gridPos.x][gridPos.y].global_position
 					currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant = true
@@ -88,7 +86,7 @@ func mousePress():
 					#maybe move this somewhere else once things work! :)
 					sunCount -= heldItem.sunCost
 			else:
-				heldItem.queue_free()
+				deleteFromScene(heldItem)
 
 func hasSeed():
 	if hand.get_child_count() > 0:
@@ -98,3 +96,9 @@ func hasSeed():
 
 func gainSun(amtSun:int):
 	sunCount += amtSun
+	
+func deleteFromScene(scene: Node):
+	scene.queue_free()
+	
+func addCompost(sunValue: int):
+	compostBin.addCompost(sunValue)

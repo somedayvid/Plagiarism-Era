@@ -170,6 +170,7 @@ func _on_normal_happiness_growth_timeout():
 func die():
 	canAction = false
 	animation.self_modulate = Color8(20,40,80)
+	sunCost /= 5
 
 #0: water, 1: spray, 2: fertilizer, 3: sun
 func _on_area_entered(area):
@@ -186,5 +187,10 @@ func _on_area_entered(area):
 		"SunItem":
 			if afflictions.has_child("SunLacking"):
 				removeAffliction("SunLacking")
+		"Shovel":
+			pass
 		_:
 			pass
+			
+func deleteFromScene():
+	queue_free()

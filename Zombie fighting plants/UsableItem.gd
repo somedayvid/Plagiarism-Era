@@ -10,9 +10,6 @@ var packetRect
 var startingPos := Vector2.ZERO
 var hovered := false
 
-#0: water, 1: spray, 2: fertilizer, 3: sun
-@export_range(0,3) var number : int
-
 func _ready():
 	startingPos = global_position
 

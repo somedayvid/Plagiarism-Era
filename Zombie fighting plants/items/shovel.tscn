@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cukxi0gjvvlsg"]
+
+[ext_resource type="PackedScene" uid="uid://dctyf5w8bjbf2" path="res://items/item_parent.tscn" id="1_qgbn3"]
+[ext_resource type="Texture2D" uid="uid://docujnpbcdu8l" path="res://assets/items.png" id="2_aadci"]
+[ext_resource type="Script" path="res://items/DeletePlant.gd" id="3_sihp2"]
+
+[node name="Shovel" instance=ExtResource("1_qgbn3")]
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_aadci")
+region_enabled = true
+region_rect = Rect2(66, 161, 29, 29)
+
+[node name="DeletePlant" type="Node2D" parent="." index="2"]
+script = ExtResource("3_sihp2")
