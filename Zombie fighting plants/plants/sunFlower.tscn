@@ -22,6 +22,10 @@ animations = [{
 
 [node name="SunFlower" instance=ExtResource("1_yi16b")]
 sunCost = 50
+waterTiming = 11.0
+fertilizerTiming = 23.0
+sunTiming = 30.0
+sprayTiming = 21.0
 
 [node name="Animation" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_efahi")

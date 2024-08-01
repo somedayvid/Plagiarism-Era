@@ -24,9 +24,9 @@ animations = [{
 sunCost = 100
 actionNode = NodePath("ShootingComponent")
 waterTiming = 11.0
-fertilizerTiming = 11.0
-sunTiming = 11.0
-sprayTiming = 11.0
+fertilizerTiming = 15.0
+sunTiming = 23.0
+sprayTiming = 28.0
 
 [node name="Animation" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_x3i6q")
