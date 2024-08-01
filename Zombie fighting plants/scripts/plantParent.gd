@@ -1,5 +1,5 @@
 extends Area2D
-
+#TODO make sure plant knows its own previous grid
 var canAction := false:
 	get:
 		return canAction
@@ -23,7 +23,7 @@ var type = "Plant"
 
 #0 for greenhouse, 1 for lawn
 var currentPlace = 0
-var lawnReady := true
+var lawnReady := false
 
 var actionDelay := 1.0:
 	get:
@@ -36,6 +36,8 @@ var canGrow := true
 var happinessToGrow := 100
 var currentHappiness := 25
 var currentHappinessGain := 1
+
+var newPlant := true
 
 @onready var waterTimer = $TimerContainer/NeedsWater
 @onready var fertilizerTimer = $TimerContainer/NeedsFertilizer

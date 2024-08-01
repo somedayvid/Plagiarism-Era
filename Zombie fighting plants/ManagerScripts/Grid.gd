@@ -33,6 +33,10 @@ var gridY := 0.0:
 		else:
 			gridY = value 
 
+var plantedList = []:
+	get:
+		return plantedList
+
 func _ready() -> void:
 	#collects tiles in gamescene for the grid
 	tile_container = get_child(0)
@@ -69,3 +73,9 @@ func updateMousePos():
 	gridX = (Singleton.mousePos.x - startX)/spriteSideLength
 	gridY = (Singleton.mousePos.y - startY)/spriteSideLength
 	currentMouseGridPos = Vector2(floor(gridX), floor(gridY))
+
+func _child_entered_tree(node):
+	plantedList.append(node)
+
+func _child_exited_tree(node):
+	plantedList.erase(node)

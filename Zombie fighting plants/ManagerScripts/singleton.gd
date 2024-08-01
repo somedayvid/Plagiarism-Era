@@ -17,8 +17,10 @@ var camera : Camera2D
 var compostBin : Node2D
 
 var currentGrid : Node2D
-
+var weatherCycle : Node2D
 var cameraLawnFocus := true
+
+var cursorHover
 
 #gameStuff
 var sunCount := 100
@@ -42,6 +44,7 @@ func _ready():
 	planterGrid = get_tree().root.get_child(1).get_node("GreenhouseScene").get_node("PlanterGrid")
 	camera = get_tree().root.get_child(1).get_node("Camera2D")
 	compostBin = get_tree().root.get_child(1).get_node("CompostBin")
+	cursorHover = get_tree().root.get_child(1).get_node("CursorTemp").item
 	
 	currentGrid = lawnGrid
 
@@ -49,10 +52,10 @@ func _process(delta):
 	mouseStuff()
 
 func mouseStuff():
-	hasSeed()
 	mousePress()
 	cameraMoving()
 	mousePosUpdates()
+	print(currentGrid)
 
 func mousePosUpdates():
 	gridPos = currentGrid.currentMouseGridPos
@@ -73,27 +76,43 @@ func cameraMoving():
 func mousePress():
 	if Input.is_action_pressed("mainAction"):
 		mouseDown = true
+	hasSeed();
 	if holdingItem:
 		var heldItem = hand.get_child(0)
 		if heldItem.type == "Plant":
+			var sunToCost := 0
+			if heldItem.newPlant == true:
+				sunToCost = heldItem.sunCost
+			else: 
+				sunToCost = 25
 			if Input.is_action_just_pressed("drop"):
-				deleteFromScene(heldItem)
-			if (currentGrid.currentMouseGridPos.x > -1 && currentGrid.currentMouseGridPos.y > -1 
-			&& sunCount >= heldItem.sunCost && !currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant
-			&& Input.is_action_just_pressed("mainAction")):
-				if currentGrid == lawnGrid && !heldItem.lawnReady:
-					deleteFromScene(heldItem)
-				else:
-					heldItem.global_position = currentGrid.placementGrid[gridPos.x][gridPos.y].global_position
-					currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant = true
-					heldItem.gridPos = gridPos
+				if heldItem.gridPos != Vector2.ZERO:
+					heldItem.global_position = currentGrid.placementGrid[heldItem.gridPos.x][heldItem.gridPos.y].global_position
 					heldItem.beingHeld = false
 					hand.remove_child(heldItem)
 					currentGrid.get_child(1).add_child(heldItem)
-					#maybe move this somewhere else once things work! :)
-					sunCount -= heldItem.sunCost
-			else:
-				deleteFromScene(heldItem)
+					currentGrid.placementGrid[heldItem.gridPos.x][heldItem.gridPos.y].hasPlant = true
+				else:
+					deleteFromScene(heldItem)
+			if Input.is_action_just_pressed("mainAction"):
+				if (currentGrid.currentMouseGridPos.x > -1 && currentGrid.currentMouseGridPos.y > -1 
+				&& sunCount >= sunToCost && !currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant):
+					if currentGrid == lawnGrid && !heldItem.lawnReady:
+						deleteFromScene(heldItem)
+					else:
+						heldItem.global_position = currentGrid.placementGrid[gridPos.x][gridPos.y].global_position
+						currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant = true
+						heldItem.newPlant = false
+						heldItem.gridPos = gridPos
+						heldItem.beingHeld = false
+						hand.remove_child(heldItem)
+						currentGrid.get_child(1).add_child(heldItem)
+						#maybe move this somewhere else once things work! :)
+						sunCount -= sunToCost
+				else:
+					if !heldItem.newPlant:
+						pass
+					else: deleteFromScene(heldItem)
 		elif heldItem.type == "Item":
 			if Input.is_action_pressed("drop"):
 				heldItem.beingHeld = false

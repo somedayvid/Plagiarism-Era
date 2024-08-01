@@ -22,7 +22,6 @@ func _process(delta) -> void:
 			var instance = scene.instantiate()
 			instance.global_position = get_tree().root.get_child(1).get_node("CursorTemp").global_position
 			get_parent().get_parent().get_parent().get_node("Hand").add_child(instance)
-			Singleton.holdingItem = true
 
 func _on_area_2d_area_entered(area):
 	hovered = true

@@ -383,5 +383,9 @@ position = Vector2(-456, 600)
 [node name="CompostBin" parent="." instance=ExtResource("15_rgixx")]
 position = Vector2(64, 496)
 
+[connection signal="child_entered_tree" from="LawnScene/Grid/PlantContainer" to="LawnScene/Grid" method="_child_entered_tree"]
+[connection signal="child_exiting_tree" from="LawnScene/Grid/PlantContainer" to="LawnScene/Grid" method="_child_exited_tree"]
 [connection signal="timeout" from="LawnScene/SunManager/SunSpawn" to="LawnScene/SunManager" method="_on_sun_spawn_timeout"]
 [connection signal="timeout" from="LawnScene/ZombieManager/TimeBetweenZombieSpawns" to="LawnScene/ZombieManager" method="_on_time_between_zombie_spawns_timeout"]
+[connection signal="child_entered_tree" from="GreenhouseScene/PlanterGrid/PlantContainer" to="GreenhouseScene/PlanterGrid" method="_child_entered_tree"]
+[connection signal="child_exiting_tree" from="GreenhouseScene/PlanterGrid/PlantContainer" to="GreenhouseScene/PlanterGrid" method="_on_plant_container_child_exiting_tree"]
