@@ -125,14 +125,6 @@ func _on_afflictions_child_entered_tree(node):
 			sprayTimer.stop()
 	actionDelay += .2
 	currentHappinessGain -= 1
-	
-	#var timeLeft = happyRateTimer.time_left
-	#var elapsedTime = happyRateTimer.wait_time - timeLeft
-	#happyRateTimer.stop()
-	#happyRateTimer.wait_time = timeLeft + .25
-	#happyRateTimer.start()
-	#happyRateTimer.wait_time = elapsedTime + timeLeft 
-	#happyRateTimer.wait_time += .25
 
 func _on_afflictions_child_exiting_tree(node):
 	var name = node.get_name()
@@ -174,7 +166,6 @@ func die():
 
 #0: water, 1: spray, 2: fertilizer, 3: sun
 func _on_area_entered(area):
-	print(area.get_parent().name)
 	match(area.get_parent().name):
 		"WateringCan":
 			if afflictions.has_node("Thirsty"):

@@ -19,6 +19,7 @@ animations = [{
 }]
 
 [node name="WallNut" instance=ExtResource("1_afl2h")]
+sunCost = 50
 
 [node name="Animation" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_ub8og")

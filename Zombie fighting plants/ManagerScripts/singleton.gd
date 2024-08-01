@@ -2,11 +2,11 @@ extends Node
 
 #mouseStuff
 var mousePos := Vector2.ZERO
-var holdingSeed := false:
+var holdingItem := false:
 	set(value):
-		holdingSeed = value
+		holdingItem = value
 	get:
-		return holdingSeed
+		return holdingItem
 var gridPos := Vector2.ZERO
 var mouseDown := false
 var justPressed := false
@@ -73,12 +73,14 @@ func cameraMoving():
 func mousePress():
 	if Input.is_action_pressed("mainAction"):
 		mouseDown = true
-	if Input.is_action_just_released("mainAction"):
-		mouseDown = false
-		if holdingSeed:
-			var heldItem = hand.get_child(0)
+	if holdingItem:
+		var heldItem = hand.get_child(0)
+		if heldItem.type == "Plant":
+			if Input.is_action_just_pressed("drop"):
+				deleteFromScene(heldItem)
 			if (currentGrid.currentMouseGridPos.x > -1 && currentGrid.currentMouseGridPos.y > -1 
-			&& sunCount >= heldItem.sunCost && !currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant):
+			&& sunCount >= heldItem.sunCost && !currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant
+			&& Input.is_action_just_pressed("mainAction")):
 				if currentGrid == lawnGrid && !heldItem.lawnReady:
 					deleteFromScene(heldItem)
 				else:
@@ -92,12 +94,17 @@ func mousePress():
 					sunCount -= heldItem.sunCost
 			else:
 				deleteFromScene(heldItem)
+		elif heldItem.type == "Item":
+			if Input.is_action_pressed("drop"):
+				heldItem.beingHeld = false
+	if Input.is_action_just_released("mainAction"):
+		mouseDown = false
 
 func hasSeed():
 	if hand.get_child_count() > 0:
-		holdingSeed = true
+		holdingItem = true
 	else:
-		holdingSeed = false
+		holdingItem = false
 
 func gainSun(amtSun:int):
 	sunCount += amtSun
