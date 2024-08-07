@@ -1,7 +1,6 @@
 extends Node2D
 
 func _process(delta):
-	#print(Singleton.cursorHover)
 	if (get_parent().beingHeld 
 	&& Singleton.currentGrid.placementGrid[Singleton.gridPos.x][Singleton.gridPos.y].hasPlant 
 	&& Singleton.mouseDown):
@@ -12,3 +11,4 @@ func _process(delta):
 				Singleton.currentGrid.placementGrid[Singleton.gridPos.x][Singleton.gridPos.y].hasPlant = false
 				Singleton.currentGrid.plantedList[i].beingHeld = true
 				Singleton.currentGrid.plantedList[i].reparent(get_tree().root.get_child(1).get_node("Hand"))
+  

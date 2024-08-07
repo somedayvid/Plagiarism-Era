@@ -1,5 +1,5 @@
 extends Area2D
-#TODO make sure plant knows its own previous grid
+
 var canAction := false:
 	get:
 		return canAction
@@ -22,7 +22,7 @@ var type = "Plant"
 @onready var animation = $Animation
 
 #0 for greenhouse, 1 for lawn
-var currentPlace = 0
+var currentGrid = 0
 var lawnReady := false
 
 var actionDelay := 1.0:

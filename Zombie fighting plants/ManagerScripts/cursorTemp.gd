@@ -16,7 +16,6 @@ func _process(delta):
 			pass
 
 func _on_body_entered(area):
-	print("yse")
 	item = area
 
 func _on_body_exited(body):

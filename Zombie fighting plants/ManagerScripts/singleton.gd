@@ -55,17 +55,16 @@ func mouseStuff():
 	mousePress()
 	cameraMoving()
 	mousePosUpdates()
-	print(currentGrid)
 
 func mousePosUpdates():
 	gridPos = currentGrid.currentMouseGridPos
 	mousePos = get_viewport().get_mouse_position()
 	if !cameraLawnFocus:
-		mousePos.x -= 576.0 * 1.5
+		mousePos.x -= 576.0 * 1.75
 
 func cameraMoving():
 	if Input.is_action_just_pressed("left"):
-		camera.global_position = Vector2(-288, 0)
+		camera.global_position = Vector2(-448, 0)
 		cameraLawnFocus = false
 		currentGrid = planterGrid
 	if Input.is_action_just_pressed("right"):
@@ -87,18 +86,19 @@ func mousePress():
 				sunToCost = 25
 			if Input.is_action_just_pressed("drop"):
 				if heldItem.gridPos != Vector2.ZERO:
-					heldItem.global_position = currentGrid.placementGrid[heldItem.gridPos.x][heldItem.gridPos.y].global_position
-					heldItem.beingHeld = false
-					hand.remove_child(heldItem)
-					currentGrid.get_child(1).add_child(heldItem)
-					currentGrid.placementGrid[heldItem.gridPos.x][heldItem.gridPos.y].hasPlant = true
+					returnToLastPlantPos(heldItem, planterGrid)
+					print(1)
 				else:
 					deleteFromScene(heldItem)
 			if Input.is_action_just_pressed("mainAction"):
 				if (currentGrid.currentMouseGridPos.x > -1 && currentGrid.currentMouseGridPos.y > -1 
 				&& sunCount >= sunToCost && !currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant):
 					if currentGrid == lawnGrid && !heldItem.lawnReady:
-						deleteFromScene(heldItem)
+						if !heldItem.newPlant:
+							returnToLastPlantPos(heldItem, planterGrid)
+							print(2)
+						else:
+							deleteFromScene(heldItem)
 					else:
 						heldItem.global_position = currentGrid.placementGrid[gridPos.x][gridPos.y].global_position
 						currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant = true
@@ -124,7 +124,7 @@ func hasSeed():
 		holdingItem = true
 	else:
 		holdingItem = false
-
+		
 func gainSun(amtSun:int):
 	sunCount += amtSun
 	
@@ -133,3 +133,10 @@ func deleteFromScene(scene: Node):
 	
 func addCompost(sunValue: int):
 	compostBin.addCompost(sunValue)
+	
+func returnToLastPlantPos(heldItem, grid):
+	heldItem.global_position = grid.placementGrid[heldItem.gridPos.x][heldItem.gridPos.y].global_position
+	heldItem.beingHeld = false
+	hand.remove_child(heldItem)
+	grid.get_child(1).add_child(heldItem)
+	grid.placementGrid[heldItem.gridPos.x][heldItem.gridPos.y].hasPlant = true
