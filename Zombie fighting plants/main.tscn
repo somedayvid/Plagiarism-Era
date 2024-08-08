@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://biwfynwotkj13"]
+[gd_scene load_steps=20 format=3 uid="uid://biwfynwotkj13"]
 
 [ext_resource type="Script" path="res://ManagerScripts/Grid.gd" id="1_mtwp2"]
 [ext_resource type="PackedScene" uid="uid://cjl7fl1a2ujim" path="res://ground_tile.tscn" id="2_b0dik"]
@@ -6,17 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://i7irs85xolx6" path="res://plants/peaShooter.tscn" id="4_3oa41"]
 [ext_resource type="PackedScene" uid="uid://byu2kdav0esxe" path="res://ManagerScripts/cursorTemp.tscn" id="6_c22bv"]
 [ext_resource type="Script" path="res://ManagerScripts/SunManager.gd" id="6_gbf2e"]
+[ext_resource type="PackedScene" uid="uid://lj2wcucxu31t" path="res://enemies/basic_zombie.tscn" id="6_sqnqs"]
 [ext_resource type="PackedScene" uid="uid://d06k8uhx66jr4" path="res://plants/sunFlower.tscn" id="7_4eh8j"]
 [ext_resource type="PackedScene" uid="uid://d20t5417075g3" path="res://items/watering_can.tscn" id="7_hfnh8"]
+[ext_resource type="PackedScene" uid="uid://dins37sgjgi28" path="res://enemies/cone_zombie.tscn" id="7_tlj01"]
 [ext_resource type="PackedScene" uid="uid://bb03qgbatgn1s" path="res://items/spray.tscn" id="8_lp77l"]
 [ext_resource type="Script" path="res://ManagerScripts/ZombieManager.gd" id="8_wi4sl"]
-[ext_resource type="PackedScene" uid="uid://hnseygyo4u4l" path="res://enemies/zombie.tscn" id="9_ox23y"]
 [ext_resource type="PackedScene" uid="uid://bxkt0p4sl655m" path="res://items/fertilizer.tscn" id="9_s8kss"]
 [ext_resource type="PackedScene" uid="uid://deo7x2oe3adld" path="res://items/sun_item.tscn" id="10_605q2"]
 [ext_resource type="PackedScene" uid="uid://bkrl8yr1ytgdx" path="res://planter_tile.tscn" id="10_l1mra"]
 [ext_resource type="PackedScene" uid="uid://mj62nc0ob3j7" path="res://plants/wall_nut.tscn" id="14_n5xj8"]
 [ext_resource type="PackedScene" uid="uid://00vati4gfiry" path="res://compost_bin.tscn" id="15_rgixx"]
 [ext_resource type="PackedScene" uid="uid://cukxi0gjvvlsg" path="res://items/shovel.tscn" id="17_8k1v5"]
+[ext_resource type="Script" path="res://ManagerScripts/WeatherCycle.gd" id="17_gwvkh"]
 
 [node name="Main" type="Node2D"]
 
@@ -280,7 +282,8 @@ offset_bottom = 148.0
 
 [node name="ZombieManager" type="Node2D" parent="LawnScene"]
 script = ExtResource("8_wi4sl")
-basicZombie = ExtResource("9_ox23y")
+basicZombie = ExtResource("6_sqnqs")
+coneZombie = ExtResource("7_tlj01")
 
 [node name="ZombieList" type="Node2D" parent="LawnScene/ZombieManager"]
 
@@ -379,7 +382,8 @@ position = Vector2(-456, 600)
 
 [node name="PlantContainer" type="Node2D" parent="GreenhouseScene/PlanterGrid"]
 
-[node name="TimeCycle" type="Node2D" parent="."]
+[node name="WeatherCycle" type="Node2D" parent="."]
+script = ExtResource("17_gwvkh")
 
 [node name="CompostBin" parent="." instance=ExtResource("15_rgixx")]
 position = Vector2(64, 496)

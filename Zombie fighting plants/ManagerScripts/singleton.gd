@@ -92,7 +92,7 @@ func mousePress():
 					deleteFromScene(heldItem)
 			if Input.is_action_just_pressed("mainAction"):
 				if (currentGrid.currentMouseGridPos.x > -1 && currentGrid.currentMouseGridPos.y > -1 
-				&& sunCount >= sunToCost && !currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant):
+				&& hasEnoughSun(sunToCost) && !currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant):
 					if currentGrid == lawnGrid && !heldItem.lawnReady:
 						if !heldItem.newPlant:
 							returnToLastPlantPos(heldItem, planterGrid)
@@ -140,3 +140,9 @@ func returnToLastPlantPos(heldItem, grid):
 	hand.remove_child(heldItem)
 	grid.get_child(1).add_child(heldItem)
 	grid.placementGrid[heldItem.gridPos.x][heldItem.gridPos.y].hasPlant = true
+	
+func hasEnoughSun(sunExpense : int) -> bool:
+	if sunCount >= sunExpense:
+		return true
+	else:
+		return false

@@ -179,8 +179,9 @@ func _on_area_entered(area):
 			if afflictions.has_node("NutrientLacking"):
 				removeAffliction("NutrientLacking")
 		"SunItem":
-			if afflictions.has_node("SunLacking"):
+			if afflictions.has_node("SunLacking") && Singleton.hasEnoughSun(sunCost):
 				removeAffliction("SunLacking")
+				Singleton.sunCount -= 25
 		_:
 			pass
 				
