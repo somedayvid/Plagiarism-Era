@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://lj2wcucxu31t"]
+
+[ext_resource type="PackedScene" uid="uid://hnseygyo4u4l" path="res://enemies/zombie_parent.tscn" id="1_5o5ae"]
+[ext_resource type="Texture2D" uid="uid://dvugjt8ulol2l" path="res://assets/monsters.png" id="2_mgeia"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urjwu"]
+atlas = ExtResource("2_mgeia")
+region = Rect2(128, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4s0di"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urjwu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BasicZombie" instance=ExtResource("1_5o5ae")]
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_4s0di")

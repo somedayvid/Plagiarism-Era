@@ -1,32 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://hnseygyo4u4l"]
+[gd_scene load_steps=6 format=3 uid="uid://hnseygyo4u4l"]
 
 [ext_resource type="Script" path="res://enemies/ZombieMovement.gd" id="1_pug5d"]
-[ext_resource type="Texture2D" uid="uid://dvugjt8ulol2l" path="res://assets/monsters.png" id="1_qpupw"]
 [ext_resource type="PackedScene" uid="uid://dnqsky3mq0na" path="res://components/health_component.tscn" id="3_tbtfd"]
 [ext_resource type="Script" path="res://components/ZombieDealDamageComponent.gd" id="4_n8tq7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hi4lu"]
 size = Vector2(14, 27)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bkrjh"]
-atlas = ExtResource("1_qpupw")
-region = Rect2(128, 128, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nom06"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bkrjh")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbj5x"]
 size = Vector2(9.66667, 20)
 
-[node name="Zombie" type="CharacterBody2D"]
+[node name="ZombieParent" type="CharacterBody2D"]
 scale = Vector2(3, 3)
 collision_layer = 2
 collision_mask = 0
@@ -38,7 +22,6 @@ position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_hi4lu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_nom06")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_tbtfd")]
 maxHealth = 200.0
