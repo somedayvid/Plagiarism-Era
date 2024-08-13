@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://00vati4gfiry"]
+[gd_scene load_steps=4 format=3 uid="uid://00vati4gfiry"]
 
 [ext_resource type="Script" path="res://compost_bin.gd" id="1_b1jf6"]
 [ext_resource type="Texture2D" uid="uid://dc0ikq7cojp2p" path="res://assets/tiles.png" id="2_jwo4a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pvjov"]
+size = Vector2(22, 30)
 
 [node name="CompostBin" type="Node2D"]
 script = ExtResource("1_b1jf6")
@@ -10,3 +13,13 @@ script = ExtResource("1_b1jf6")
 texture = ExtResource("2_jwo4a")
 region_enabled = true
 region_rect = Rect2(134, 545, 22, 29)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_pvjov")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

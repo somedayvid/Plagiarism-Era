@@ -75,7 +75,9 @@ func updateMousePos():
 	currentMouseGridPos = Vector2(floor(gridX), floor(gridY))
 
 func _child_entered_tree(node):
+	print(plantedList.size())
 	plantedList.append(node)
 
-func _child_exited_tree(node):
+func removeChild(node):
 	plantedList.erase(node)
+	print(plantedList.size())

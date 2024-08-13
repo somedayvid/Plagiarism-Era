@@ -35,7 +35,6 @@ const spriteSideLength := 96
 
 const lackNutrientAffliction = preload("res://components/Afflictions/nutrient_lacking.tscn")
 const lackSprayAffliction = preload("res://components/Afflictions/spray_lacking.tscn")
-const lackSunAffliction = preload("res://components/Afflictions/sun_lacking.tscn")
 const thirstAffliction = preload("res://components/Afflictions/thirsty.tscn")
 
 func _ready():
@@ -50,6 +49,7 @@ func _ready():
 
 func _process(delta):
 	mouseStuff()
+	#print(currentGrid.plantedList.size())
 
 func mouseStuff():
 	mousePress()
@@ -86,17 +86,24 @@ func mousePress():
 				sunToCost = 25
 			if Input.is_action_just_pressed("drop"):
 				if heldItem.gridPos != Vector2.ZERO:
-					returnToLastPlantPos(heldItem, planterGrid)
-					print(1)
+					var plantGrid
+					if heldItem.currentGrid == 0:
+						plantGrid = planterGrid
+					else:
+						plantGrid = lawnGrid
+					returnToLastPlantPos(heldItem, plantGrid)
 				else:
 					deleteFromScene(heldItem)
 			if Input.is_action_just_pressed("mainAction"):
-				if (currentGrid.currentMouseGridPos.x > -1 && currentGrid.currentMouseGridPos.y > -1 
+				if compostBin.plantHover:
+					compostBin.addCompost(heldItem.sunCost/5)
+					currentGrid.removeChild(heldItem)
+					deleteFromScene(heldItem)
+				elif (currentGrid.currentMouseGridPos.x > -1 && currentGrid.currentMouseGridPos.y > -1 
 				&& hasEnoughSun(sunToCost) && !currentGrid.placementGrid[gridPos.x][gridPos.y].hasPlant):
 					if currentGrid == lawnGrid && !heldItem.lawnReady:
 						if !heldItem.newPlant:
 							returnToLastPlantPos(heldItem, planterGrid)
-							print(2)
 						else:
 							deleteFromScene(heldItem)
 					else:
@@ -105,10 +112,15 @@ func mousePress():
 						heldItem.newPlant = false
 						heldItem.gridPos = gridPos
 						heldItem.beingHeld = false
+						if heldItem.currentGrid == 0 && currentGrid == lawnGrid:
+							heldItem.currentGrid = 1
+						elif heldItem.currentGrid == 1 && currentGrid == planterGrid:
+							heldItem.currentGrid = 0
 						hand.remove_child(heldItem)
 						currentGrid.get_child(1).add_child(heldItem)
 						#maybe move this somewhere else once things work! :)
 						sunCount -= sunToCost
+						
 				else:
 					if !heldItem.newPlant:
 						pass

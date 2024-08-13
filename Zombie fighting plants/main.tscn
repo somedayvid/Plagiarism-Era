@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://biwfynwotkj13"]
+[gd_scene load_steps=18 format=3 uid="uid://biwfynwotkj13"]
 
 [ext_resource type="Script" path="res://ManagerScripts/Grid.gd" id="1_mtwp2"]
 [ext_resource type="PackedScene" uid="uid://cjl7fl1a2ujim" path="res://ground_tile.tscn" id="2_b0dik"]
@@ -13,12 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://bb03qgbatgn1s" path="res://items/spray.tscn" id="8_lp77l"]
 [ext_resource type="Script" path="res://ManagerScripts/ZombieManager.gd" id="8_wi4sl"]
 [ext_resource type="PackedScene" uid="uid://bxkt0p4sl655m" path="res://items/fertilizer.tscn" id="9_s8kss"]
-[ext_resource type="PackedScene" uid="uid://deo7x2oe3adld" path="res://items/sun_item.tscn" id="10_605q2"]
 [ext_resource type="PackedScene" uid="uid://bkrl8yr1ytgdx" path="res://planter_tile.tscn" id="10_l1mra"]
 [ext_resource type="PackedScene" uid="uid://mj62nc0ob3j7" path="res://plants/wall_nut.tscn" id="14_n5xj8"]
 [ext_resource type="PackedScene" uid="uid://00vati4gfiry" path="res://compost_bin.tscn" id="15_rgixx"]
 [ext_resource type="PackedScene" uid="uid://cukxi0gjvvlsg" path="res://items/shovel.tscn" id="17_8k1v5"]
-[ext_resource type="Script" path="res://ManagerScripts/WeatherCycle.gd" id="17_gwvkh"]
 
 [node name="Main" type="Node2D"]
 
@@ -303,9 +301,6 @@ position = Vector2(64, 408)
 [node name="Fertilizer" parent="LawnScene/UsableItems" instance=ExtResource("9_s8kss")]
 position = Vector2(64, 328)
 
-[node name="SunItem" parent="LawnScene/UsableItems" instance=ExtResource("10_605q2")]
-position = Vector2(64, 40)
-
 [node name="Shovel" parent="LawnScene/UsableItems" instance=ExtResource("17_8k1v5")]
 position = Vector2(64, 600)
 
@@ -382,9 +377,6 @@ position = Vector2(-456, 600)
 
 [node name="PlantContainer" type="Node2D" parent="GreenhouseScene/PlanterGrid"]
 
-[node name="WeatherCycle" type="Node2D" parent="."]
-script = ExtResource("17_gwvkh")
-
 [node name="CompostBin" parent="." instance=ExtResource("15_rgixx")]
 position = Vector2(64, 496)
 
@@ -393,4 +385,3 @@ position = Vector2(64, 496)
 [connection signal="timeout" from="LawnScene/SunManager/SunSpawn" to="LawnScene/SunManager" method="_on_sun_spawn_timeout"]
 [connection signal="timeout" from="LawnScene/ZombieManager/TimeBetweenZombieSpawns" to="LawnScene/ZombieManager" method="_on_time_between_zombie_spawns_timeout"]
 [connection signal="child_entered_tree" from="GreenhouseScene/PlanterGrid/PlantContainer" to="GreenhouseScene/PlanterGrid" method="_child_entered_tree"]
-[connection signal="child_exiting_tree" from="GreenhouseScene/PlanterGrid/PlantContainer" to="GreenhouseScene/PlanterGrid" method="_on_plant_container_child_exiting_tree"]

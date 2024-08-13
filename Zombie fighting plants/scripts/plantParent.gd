@@ -23,7 +23,7 @@ var type = "Plant"
 
 #0 for greenhouse, 1 for lawn
 var currentGrid = 0
-var lawnReady := false
+var lawnReady := true
 
 var actionDelay := 1.0:
 	get:
@@ -41,21 +41,19 @@ var newPlant := true
 
 @onready var waterTimer = $TimerContainer/NeedsWater
 @onready var fertilizerTimer = $TimerContainer/NeedsFertilizer
-@onready var sunTimer = $TimerContainer/NeedsSun
 @onready var sprayTimer = $TimerContainer/NeedsSpray
 @onready var happyRateTimer = $TimerContainer/NormalHappinessGrowth
 
 @export var waterTiming : float
 @export var fertilizerTiming : float
-@export var sunTiming : float
 @export var sprayTiming : float
 
 var afflictionTimingsList = []
 
 @onready var afflictions = $Afflictions
 
-#0: water, 1: spray, 2: fertilizer, 3: sun
-var currentAfflictionDict = {0:false, 1:false, 2:false, 3:false}
+#0: water, 1: spray, 2: fertilizer
+var currentAfflictionDict = {0:false, 1:false, 2:false}
 
 signal startAction
 signal upgrade
@@ -64,12 +62,10 @@ func _ready():
 	if !staticImage:
 		waterTimer.wait_time = waterTiming
 		fertilizerTimer.wait_time = fertilizerTiming
-		sunTimer.wait_time = sunTiming
 		sprayTimer.wait_time = sprayTiming
 		
 		waterTimer.start()
 		fertilizerTimer.start()
-		sunTimer.start()
 		sprayTimer.start()
 
 func _process(delta) -> void:
@@ -99,17 +95,12 @@ func _on_needs_fertilizer_timeout():
 	instance.position = Vector2(0, -10)
 	afflictions.add_child(instance)
 
-func _on_needs_sun_timeout():
-	var instance = Singleton.lackSunAffliction.instantiate()
-	instance.position = Vector2(10, -10)
-	afflictions.add_child(instance)
-
 func _on_needs_spray_timeout():
 	var instance = Singleton.lackSprayAffliction.instantiate()
 	instance.position = Vector2(20, -10)
 	afflictions.add_child(instance)
 
-#0: water, 1: spray, 2: fertilizer, 3: sun
+#0: water, 1: spray, 2: fertilizer
 func _on_afflictions_child_entered_tree(node):
 	var name = node.get_name()
 	match(name):
@@ -119,9 +110,6 @@ func _on_afflictions_child_entered_tree(node):
 		"NutrientLacking":
 			currentAfflictionDict[2] = true
 			fertilizerTimer.stop()
-		"SunLacking":
-			currentAfflictionDict[3] = true
-			sunTimer.stop()
 		"SprayLacking":
 			currentAfflictionDict[1] = true
 			sprayTimer.stop()
@@ -137,9 +125,6 @@ func _on_afflictions_child_exiting_tree(node):
 		"NutrientLacking":
 			currentAfflictionDict[0] = true
 			fertilizerTimer.start()
-		"SunLacking":
-			currentAfflictionDict[0] = true
-			sunTimer.start()
 		"SprayLacking":
 			currentAfflictionDict[0] = true
 			sprayTimer.start()
@@ -164,9 +149,8 @@ func _on_normal_happiness_growth_timeout():
 func die():
 	canAction = false
 	animation.self_modulate = Color8(20,40,80)
-	sunCost /= 5
 
-#0: water, 1: spray, 2: fertilizer, 3: sun
+#0: water, 1: spray, 2: fertilizer
 func _on_area_entered(area):
 	match(area.get_parent().name):
 		"WateringCan":
@@ -178,12 +162,8 @@ func _on_area_entered(area):
 		"Fertilizer":
 			if afflictions.has_node("NutrientLacking"):
 				removeAffliction("NutrientLacking")
-		"SunItem":
-			if afflictions.has_node("SunLacking") && Singleton.hasEnoughSun(sunCost):
-				removeAffliction("SunLacking")
-				Singleton.sunCount -= 25
 		_:
 			pass
-				
+
 func deleteFromScene():
 	queue_free()
