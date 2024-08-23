@@ -275,6 +275,7 @@ offset_left = 16.0
 offset_top = 80.0
 offset_right = 109.0
 offset_bottom = 148.0
+metadata/_edit_use_anchors_ = true
 
 [node name="SunList" type="Node2D" parent="LawnScene/SunManager"]
 
