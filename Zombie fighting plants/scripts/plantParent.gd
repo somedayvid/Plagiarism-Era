@@ -35,7 +35,7 @@ var canGrow := true
 
 var happinessToGrow := 100
 var currentHappiness := 25
-var currentHappinessGain := 1
+var currentHappinessGain := 2
 
 var newPlant := true
 
@@ -164,6 +164,9 @@ func _on_area_entered(area):
 				removeAffliction("NutrientLacking")
 		_:
 			pass
+
+func returnType():
+	return type
 
 func deleteFromScene():
 	queue_free()

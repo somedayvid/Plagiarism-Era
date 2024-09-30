@@ -27,12 +27,12 @@ func _on_time_between_attacks_timeout():
 	dealDamage()
 
 func _on_plant_detection_area_entered(area):
-	if area.get_parent().type == "Plant":
-		if !area.beingHeld:
-			eatingTarget = area
-			get_parent().eating = true
-			attackTimer.start()
+	if area.has_method("returnType"):
+		if area.returnType() == "Plant":
+			if !area.beingHeld:
+				eatingTarget = area
+				get_parent().eating = true
+				attackTimer.start()
 
 func _on_plant_detection_area_exited(area):
 	eatingTarget = null
-

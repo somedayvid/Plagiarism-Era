@@ -25,7 +25,6 @@ sunCost = 100
 actionNode = NodePath("ShootingComponent")
 waterTiming = 11.0
 fertilizerTiming = 15.0
-sunTiming = 23.0
 sprayTiming = 28.0
 
 [node name="Animation" parent="." index="0"]

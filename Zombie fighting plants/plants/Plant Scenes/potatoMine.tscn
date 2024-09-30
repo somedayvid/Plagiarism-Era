@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://65anovlo0h5g"]
+
+[ext_resource type="PackedScene" uid="uid://c74u20fgko2rr" path="res://plants/plant_parent.tscn" id="1_ocpmy"]
+[ext_resource type="Texture2D" uid="uid://h14ms64v4tpq" path="res://assets/animals.png" id="2_i6fc1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xuw7"]
+atlas = ExtResource("2_i6fc1")
+region = Rect2(160, 160, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_875yw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xuw7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PlantParent" instance=ExtResource("1_ocpmy")]
+
+[node name="Animation" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_875yw")
+flip_h = true
